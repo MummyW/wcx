@@ -64,7 +64,8 @@
 	}
 
 	// 将认证码存入SESSION
-	session.setAttribute("rand", sRand);     
+	session.setAttribute("rand", sRand);   
+	System.out.println("sRand"+sRand);
 
 	// 图象生效
 	g.dispose();
