@@ -3,11 +3,15 @@
 <!DOCTYPE html>
 <html lang="zh-Hans-CN">
     <head>
+    <%
+    	//获取服务器地址, 它是以/开始,并不以/结束
+    	pageContext.setAttribute("WEBAPP",request.getContextPath());
+    %>
         <meta charset="UTF-8">
         <title>问查星注册</title>
         <meta http-equiv="Cache-Control" content="no-transform">
         <meta http-equiv="Cache-Control" content="no-siteapp">
-        <link rel="shortcut icon" href="../img/wlogo.png" type="image/x-icon">
+        <link rel="shortcut icon" href="${WEBAPP }/img/wlogo.png" type="image/x-icon">
         <style type="text/css">
         @import url(css/common.css);
         @import url(css/register.css);
@@ -19,7 +23,7 @@
                 <a href="javascript:void(0)" class="logo"><img src="../img/logo1.png" width="150" height="59" alt=""></a>
                 <div class="info fr">
                     <a href="wenchaxinglogin.html" class="login btn">登录</a>
-                    <a href="../index.html" class="backwcx btn">返回首页</a>
+                    <a href="${WEBAPP }/index.html" class="backwcx btn">返回首页</a>
                 </div>
             </div>
             <div id="register-box" class="validate-box">
@@ -74,7 +78,7 @@
                 </filedset>
             </div>
         </div>
-        <script src="../js/jQuery-3.3.0-min.js"></script>
+        <script src="${WEBAPP }/js/jQuery-3.3.0-min.js"></script>
         <script type="text/javascript">
 
             var $USER = $("#Register1_UserName"),
@@ -168,7 +172,7 @@
                 var $pwd = $("#Register1_password").val();
                 if(Register1_txtCodeInput == '' || $pwd == ''){
                     $("#Register1_lbMsg").show();
-                }else if($Register1_txtCodeInput == ){
+                }else if($Register1_txtCodeInput == ""){
                 	
                 }
             }
