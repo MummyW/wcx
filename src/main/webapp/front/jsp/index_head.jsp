@@ -38,11 +38,8 @@
 					<c:when test="${ empty currentMemberInfo.mname  }">
 						<li id="Register"><a href="front/wenchaxinglogin.html"
 							target="_blank" id="login" class="transition">登录</a></li>
-						<li><a href="front/register.html" target="_blank">注册</a></li>
+						<li><a href="front/register.jsp" target="_blank">注册</a></li>
 					</c:when>
-					<!-- <c:otherwise>
-                        		<li id="loginBack"><a href="javascript:void(0)" target="_blank" id="loginBack" class="loginBack">进入管理后台</a></li>
-                        	</c:otherwise> -->
 				</c:choose>
 
 
