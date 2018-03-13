@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.wcx.bean.UserInfo;
 import com.wcx.biz.IUserInfoBiz;
 import com.wcx.dao.BaseDao;
+import com.wcx.util.MD5Encryption;
 import com.wcx.util.StringUtil;
 
 @Service
@@ -27,6 +28,17 @@ public class UserInfoBizImpl implements IUserInfoBiz{
 			map.put("pwd", pwd);
 			System.out.println(map);
 			return (UserInfo)this.baseDao.find(UserInfo.class, map, "userLogin");
+		}
+	}
+
+	@Override
+	public int userReg(UserInfo userInfo) {
+		if(StringUtil.isNull(userInfo.getWcxuname(),userInfo.getWcxupwd())){
+			return 0;
+		}else{
+			//密码加密
+			userInfo.setWcxupwd(MD5Encryption.createPassword(userInfo.getWcxupwd()));
+			return this.baseDao.add(UserInfo.class, userInfo, "leaguerReg");
 		}
 	}
 	

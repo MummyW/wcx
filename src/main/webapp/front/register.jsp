@@ -175,7 +175,9 @@
                 }else if($Register1_txtCodeInput == ""){
                 	alert("请输入验证码");
                 }else{
-                	
+                	$.post("userRegister",{uname:$userName,pwd:$pwd},function(data){
+                		console.log(data)
+                	},"text")
                 }
             }
 

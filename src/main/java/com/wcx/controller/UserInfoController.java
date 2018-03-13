@@ -1,5 +1,6 @@
 package com.wcx.controller;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,14 @@ public class UserInfoController {
 			session.setAttribute("currentLoginUser", userInfo);
 			return gson.toJson(userInfo);
 		}
+	}
+	
+	@RequestMapping("/userRegister")
+	@ResponseBody
+	public Integer userReg(UserInfo userInfo){
+		System.out.println(1);
+		int result = this.userInfoBiz.userReg(userInfo);
+		return result;
+		
 	}
 }
