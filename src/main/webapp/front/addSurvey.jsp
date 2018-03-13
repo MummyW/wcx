@@ -27,6 +27,20 @@
             padding:30px 0 30px 0;
         }
         #box:hover{border:1px solid #ff6700;}
+        
+         .title{
+            position: relative;
+            margin: 0 auto;
+            width: 610px;
+            height:100px;
+            font-size: 20px;
+            line-height: 100px;
+            background:#fff;
+            padding:30px 0 30px 0;
+        }
+        .title:hover{border:1px solid #ff6700;}
+        
+        
         #box .left{
             position: absolute;
             left:0px;
@@ -73,6 +87,52 @@
             line-height:35px;
             width:100%;
         }
+        .title .left{
+            position: absolute;
+            left:0px;
+            top:5px;
+            color: red;
+            height:30px;
+        }
+        .title .right{
+            position: absolute;
+            left:200px;
+            top:5px;
+            color: red;
+            height:30px;
+        }
+
+        .title ul{
+            position: absolute;
+            left:80px;
+            top:6px;
+            margin:40px 10px 0 10px;
+            width: 100px;
+            height: 20px;
+        }
+        .title ul li{
+            float: left;
+            width: 20px;
+            height: 20px;
+			background:url(../image/starcontent.png);
+            cursor:pointer;
+        }
+        .title ul li.on{
+            background-position: 0 -28px;
+        }
+
+        .title .surveycontent{
+            position: absolute;
+            top:70px;
+            margin-top: 10px;
+            line-height: 20px;
+        }
+        .title .problem{
+            position: absolute;
+            top:5px;height:35px;
+            line-height:35px;
+            width:100%;
+        }
         .div_ins_question {
             position: absolute;
             padding-top:0px;
@@ -108,41 +168,54 @@
             </div>
         </div>
         
+         <div class="title">
+            <p class="problem" contenteditable="true" >2.你对你女朋友的评价: </p>
+            <span class="left">很不满意</span>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <span class="right">满意</span>
+            <p class="surveycontent">提示: 请认真给当前文章打分!</p>
+            <div class="div_ins_question"></div>
+            <div class="div_edit_question" style="none">
+
+            </div>
+        </div>
         <div id="voteManage" class="box">
-	<h2>添加新投票</h2>
-    
-    <div id="content">
-    	<form id="myform">
-        	<dl>
-                <dt>投票内容：</dt>
-                <dd>
-                	<input id="title" class="input-text" type="text" name="title">
-                </dd>
-                <dt>投票类型：</dt>
-                <dd>
-                	<input type="radio" value="1" checked="checked" name="type">
-                    单选
-                    <input type="radio" value="2" name="type">
-                    多选
-                </dd>
-                <dt>投票选项：</dt>
-                <dd id="voteoptions">
-                	<p>
-                    	<input class="input-text" type="text" name="options">
-                    </p>
-                    <p>
-                    	<input class="input-text" type="text" name="options">
-                    </p>
-                </dd>
-                <dt></dt>
-                <dd class="button">
-                	<a style="background: url(../image/button_submit.gif) no-repeat;display: inline-block;float: left;width: 76px;height: 31px" href="javascript:addVoting()"></a>
-                    <a onclick="AddOption()" href="javascript:void(0);">增加选项</a>
-                    <a href="#">取消操作</a>
-                </dd>
-            </dl>
-        </form>
-    </div>
+	    <div id="content">
+	    	<form id="myform">
+	        	<dl>
+	                <dt>投票内容：</dt>
+	                <dd>
+	                	<input id="title" class="input-text" type="text" name="title">
+	                </dd>
+	                <dt>投票类型：</dt>
+	                <dd>
+	                	<input type="radio" value="1" checked="checked" name="type">单选
+	                    <input type="radio" value="2" name="type">多选
+	                </dd>
+	                <dt>投票选项：</dt>
+	                <dd id="voteoptions">
+	                	<p>
+	                    	<input class="input-text" type="text" name="options">
+	                    </p>
+	                    <p>
+	                    	<input class="input-text" type="text" name="options">
+	                    </p>
+	                </dd>
+	                <dt></dt>
+	                <dd class="button">
+	                	<a style="background: url(../image/button_submit.gif) no-repeat;display: inline-block;float: left;width: 76px;height: 31px" href="javascript:addVoting()"></a>
+	                    <a onclick="AddOption()" href="javascript:void(0);">增加选项</a>
+	                    <a href="#">取消操作</a>
+	                </dd>
+	            </dl>
+	        </form>
+	    </div>
 </div>
     <script>
         var aLi = document.querySelectorAll("#box ul li"),
