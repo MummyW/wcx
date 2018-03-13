@@ -66,7 +66,7 @@
 			                        	<label class="sr-only" for="form-password">Password</label>
 			                        	<input type="password" name="form-password" placeholder="请输入您的密码..." class="form-password form-control" id="form-password">
 			                        </div>
-			                        <button type="submit" class="btn">登录</button>
+			                        <button type="submit" class="btn" value="登录" onclick="leaguerLogin()">登录</button>
 			                    </form>
 		                    </div>
                         </div>
@@ -100,5 +100,27 @@
         <script src="assets/js/jquery.backstretch.min.js"></script>
         <script src="assets/js/scripts.js"></script>		<!--使得背景图片按一定规律变换图片-->
     </body>
-
+<script type="text/javascript">
+function leaguerLogin(){
+	var account=$.trim( $("#account").val() );
+	var pwd=$.trim( $("#pwd").val() );
+	if(account=="" || pwd==""){
+		return;
+	}
+	
+	$.post("leaguerLogin",{account:account,pwd:pwd},function(data){
+		if(data!=null && data!=""){
+			closeLoginDiv();
+			$("#loginInfo").html('<a href="javascript:void(0)">&nbsp;'+data.lname+'></a>');
+			$("#addBlog").html('<a href="back/blog.jsp">写博文</a>');
+			if(data.photo!="" && data.photo!=null){
+				$("#userLoginPhoto").attr("src",data.photo);
+			}
+			$("#showLeaguerPhoto").attr("href","javascript:showPhotoDiv()");
+		}else{
+			alert("账号或密码错误...")
+		}
+	},"json");
+}
+</script>
 </html>

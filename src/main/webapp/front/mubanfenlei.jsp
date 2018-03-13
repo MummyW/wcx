@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>选择创建问卷类型_问查星</title>
-<link type="text/css" rel="stylesheet" href="css/mubanfenlei.css" />
+<link type="text/css" rel="stylesheet" href="../css/mubanfenlei.css" />
 <link rel="shortcut icon" href="../img/wlogo.png" type="image/x-icon">
 
 </head>
