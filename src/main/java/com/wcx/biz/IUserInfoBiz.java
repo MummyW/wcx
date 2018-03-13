@@ -5,4 +5,6 @@ import com.wcx.bean.UserInfo;
 public interface IUserInfoBiz {
 	
 	public UserInfo userInfoLogin(String uname,String pwd);
+	
+	int userReg(UserInfo userInfo);
 }
