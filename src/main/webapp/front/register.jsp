@@ -173,6 +173,8 @@
                 if(Register1_txtCodeInput == '' || $pwd == ''){
                     $("#Register1_lbMsg").show();
                 }else if($Register1_txtCodeInput == ""){
+                	alert("请输入验证码");
+                }else{
                 	
                 }
             }

@@ -199,9 +199,7 @@
                 </div>
             </div>
         </div>
-        <style type="text/css">
-
-        </style>
+        
         <div class="top_rocket">
             <i class="rocket"></i>
         </div>
