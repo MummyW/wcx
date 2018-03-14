@@ -30,10 +30,9 @@ public class UserInfoController {
 		}
 	}
 	
-	@RequestMapping("/userRegister")
+	@RequestMapping("/front/userRegister")
 	@ResponseBody
 	public Integer userReg(UserInfo userInfo){
-		System.out.println(1);
 		int result = this.userInfoBiz.userReg(userInfo);
 		return result;
 		

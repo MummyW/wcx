@@ -15,7 +15,7 @@
 	<import resource="classpath:com/wcx/config/spring-bean.xml"/>
 	
 	<context:component-scan base-package="com.wcx">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
 	<mvc:annotation-driven>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wcx.mapper.UserInfoMapper">
+	<!-- 注册用户 -->
+	<insert id="userInfoReg" parameterType="UserInfo">
+		<selectKey keyProperty="wcxuid" keyColumn="wcxuid" resultType="Integer" order="BEFORE">
+			select seq_wenchaxinguserInfo_wcxuid.nextval from dual
+		</selectKey>
+			insert into wenchaxinguserInfo(wcxuid,wcxuname,wcxupwd,wcxuemail) values(#{wcxuid},#{wcxuname},#{wcxupwd},#{wcxuemail})
+	</insert>
+</mapper>

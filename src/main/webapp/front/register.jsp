@@ -117,7 +117,7 @@
             })
 
             $USER.keyup(function(){
-                lose(oUserName);
+                lose($USER);
                 //验证用户名
                 function lose(obj){
                     var pattern = /^[a-zA-z0-9]{4,9}|[a-zA-z0-9]$/;
@@ -170,12 +170,13 @@
                 var $Register1_txtCodeInput = $("#Register1_txtCodeInput").val();
                 var $userName = $("#Register1_UserName").val();
                 var $pwd = $("#Register1_password").val();
+                var $email = $("#Register1_tel").val();
                 if(Register1_txtCodeInput == '' || $pwd == ''){
                     $("#Register1_lbMsg").show();
                 }else if($Register1_txtCodeInput == ""){
                 	alert("请输入验证码");
                 }else{
-                	$.post("userRegister",{uname:$userName,pwd:$pwd},function(data){
+                	$.post("userRegister",{wcxuname:$userName,wcxupwd:$pwd,wcxuemail:$email},function(data){
                 		console.log(data)
                 	},"text")
                 }
