@@ -15,7 +15,7 @@
 	<import resource="classpath:com/wcx/config/spring-bean.xml"/>
 	
 	<context:component-scan base-package="com.wcx">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
 	<mvc:annotation-driven>
@@ -40,8 +40,11 @@
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/back/*"/>
-			<mvc:exclude-mapping path="/back/backlogin.html"/>
+			<mvc:mapping path="/back/manager/*"/>
+			<mvc:mapping path="/back/assets/*"/>
+			<mvc:mapping path="/back/css/*"/>
+			<mvc:mapping path="/back/images/*"/>
+			<mvc:mapping path="/back/js/*"/>
 			<bean class="com.wcx.interceptor.CheckLoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
