@@ -33,12 +33,13 @@ public class UserInfoBizImpl implements IUserInfoBiz{
 
 	@Override
 	public int userReg(UserInfo userInfo) {
-		if(StringUtil.isNull(userInfo.getWcxuname(),userInfo.getWcxupwd())){
+		System.out.println("注册"+userInfo);
+		if(StringUtil.isNull(userInfo.getWcxuname(),userInfo.getWcxupwd(),userInfo.getWcxuemail()   )){
 			return 0;
 		}else{
 			//密码加密
 			userInfo.setWcxupwd(MD5Encryption.createPassword(userInfo.getWcxupwd()));
-			return this.baseDao.add(UserInfo.class, userInfo, "leaguerReg");
+			return this.baseDao.add(UserInfo.class, userInfo, "userInfoReg");
 		}
 	}
 	
