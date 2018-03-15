@@ -7,6 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
         <title>添加问卷项</title>
         <link type="text/css" rel="stylesheet" href="css/add.css"/>
+        <link rel="icon" href="../img/wlogo.png"/>
         <link type="">
         <style type="text/css">
             *{margin:0;padding:0;}
@@ -145,12 +146,20 @@
             clear: both;
         }
         #wrap{text-align: left;opacity: 1;width: 920px;background:url(../image/oldbg2.jpg) no-repeat top center;margin:0 auto;padding-top: 105px;}
-		
+		#surveyTitle{margin: 4px auto;height: 100px;line-height: 39px;padding: 2px; background: #fff;color: #ff6700;width: 610px;border-bottom: 4px dashed #333;font-size: 40px;font-style: italic;font-weight: bold;    text-align: center;}
+		.description input{    width: 100%;height: 40px;display: block; }
 		
         </style>
     </head>
     <body style="background:#ddf4ff url(../image/oldbg2-bg.jpg) repeat-x;">
         <div id="wrap"></div>
+        
+        <!-- 标题 -->
+        <div id="surveyTitle"><%= session.getAttribute("wcxsname") %>
+        	<p class="description" ><input placeholder="请输入描述信息"></p>
+        </div>
+        
+        
         <div id="box">
             <p class="problem" contenteditable="true" >1.你对你小组长的评价: </p>
             <span class="left">很不满意</span>
@@ -188,7 +197,6 @@
         </div>
         <div id="voteManage" class="box">
         
-       <div id="surveyTitle"><%= request.getParameter("wcxsname") %></div>
 	    <div id="content">
 	    	<form id="myform">
 	        	<dl>

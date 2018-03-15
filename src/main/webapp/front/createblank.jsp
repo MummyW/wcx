@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             &nbsp;   &nbsp;   &nbsp;
                                         </td>
                                         <td valign="middle" style="padding-bottom: 30px;">
-                                        	<input type="submit" name="ctl01$ContentPlaceHolder1$lbtnNextStep" value="立即创建" onclick="return checkLogin();" id="ctl01_ContentPlaceHolder1_lbtnNextStep" class="btn btn-default create__btn-new" style="width:200px;" />
+                                        	<input  name="ctl01$ContentPlaceHolder1$lbtnNextStep" value="立即创建" onclick="checkLogin()" id="ctl01_ContentPlaceHolder1_lbtnNextStep" class="btn btn-default create__btn-new" style="width:200px;" />
                                             <div style="float: right; display: inline; margin-top: 58px; margin-left: 30px;">
                                             	<span id="ctl01_ContentPlaceHolder1_lblMsg" style="color:Red;"></span>
                                             </div>
@@ -105,18 +105,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script>
     var createQuestion = $("#ctl01_ContentPlaceHolder1_lbtnNextStep");
     var questionName = $.trim( $("#ctl01_ContentPlaceHolder1_txtQName").val() );
-    createQuestion.click(function(){
+   
+    function checkLogin(){
     	if(questionName == ""){
     		alert("请输入问卷名称");
     		
     		return;
     	}else{
-    		location.href="addSurvey.jsp?questionName="+questionName;
     		$.post("addSurvey",{wcxsname:questionName},function(data){
-    			
-    		},"text")
+    			console.log(data)
+	    		if(data == 1 || data=="1"){
+		    		location.href="addSurvey.jsp";
+	    		}	
+    		},"text");
     	}
-    })
+    }
+    /* createQuestion.click(function(){
+    	
+    }) */
     
     </script>
 </body>
