@@ -17,7 +17,7 @@ public class UserInfoController {
 	@Autowired
 	private IUserInfoBiz userInfoBiz;
 	
-	@RequestMapping("/userLogin")
+	@RequestMapping("/front/userLogin")
 	@ResponseBody
 	public String userLogin(HttpSession session,String uname,String pwd){
 		UserInfo userInfo = this.userInfoBiz.userInfoLogin(uname, pwd);

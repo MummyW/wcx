@@ -10,4 +10,9 @@
 		</selectKey>
 			insert into wenchaxinguserInfo(wcxuid,wcxuname,wcxupwd,wcxuemail) values(#{wcxuid},#{wcxuname},#{wcxupwd},#{wcxuemail})
 	</insert>
+	
+	<!-- 登录用户 -->
+	<select id="userLogin" parameterType="Map" resultType="UserInfo">
+		select * from wenchaxinguserInfo where wcxuname=#{uname} and wcxupwd=#{pwd}
+	</select>
 </mapper>

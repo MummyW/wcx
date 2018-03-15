@@ -22,7 +22,25 @@
             float: left !important;
         }
     </style>
-    <!--<script src="/js/zhezhao.js?v=1" type="text/javascript"></script>-->
+    <script type="text/javascript">
+    	function userLogin(){
+    		var uname = $.trim( $("#UserName").val() );
+    		var pwd = $.trim( $("#Password").val() );
+    		
+    		if(uname == "" || pwd == ""){
+    			alert("登录失败，账号或密码不能为空 . . . ");
+    			return;
+    		}
+    		//alert(uname + pwd);
+    		$.post("userLogin",{uname:uname,pwd:pwd},function(data){
+    			if(data!="" && data!=null){
+    				window.location.href="../index.jsp";
+    			}else{
+    				alert("账号或密码输入错误，请重新输入 . . .");
+    			}
+    		},"json");
+    	}
+    </script>
 </head>
 
 <body id="body1" class="fp-viewing">
@@ -42,8 +60,8 @@
                 <img src="image/login_img/logo.png" alt="问卷星_不止问卷调查/在线考试">
             </a>
             <div class="member pull-right">
-                <a href="login.jsp" class="btn btn-default btn-lg pull-left login hidden" rel="nofollow">登录</a>
-                <a href="register.jsp" class="btn btn-default btn-lg pull-left register " rel="nofollow">注册</a>
+                <a href="login.jsp" class="btn btn-default btn-lg pull-left login hidden" rel="nofollow">登入</a>
+                <a href="register.html" class="btn btn-default btn-lg pull-left register " rel="nofollow">注册</a>
                 <a href="../index.html" class="btn btn-default btn-lg pull-left back-wjx">返回首页</a>
             </div>
         </div>
@@ -79,10 +97,10 @@
                     </div>
                 </fieldset>
                 <fieldset class="submit-wrapper" style="text-align: center; margin-top: 20px;">
-                    <input type="submit" name="LoginButton" value="登 录" id="LoginButton" class="submitbutton" onmouseover="this.className=&#39;submitbutton submitbutton_hover&#39;;" onmouseout="this.className=&#39;submitbutton&#39;;" style="color:White;" />
+                    <input type="button" name="LoginButton" value="登 录" id="LoginButton" class="submitbutton" onmouseover="this.className=&#39;submitbutton submitbutton_hover&#39;;" onmouseout="this.className=&#39;submitbutton&#39;;" style="color:White;" onclick="userLogin()"/>
                     <span style="color: red; line-height: 28px;">
                         </span>
-                    <a href="/register/register.aspx?type=1" id="hrefRegister" title="只需２０秒，就可完成注册" class="register-now">立即注册</a>
+                    <a href="register.html" id="hrefRegister" title="只需２０秒，就可完成注册" class="register-now">立即注册</a>
                     <div class="third-party-login">
                         <div class="third-party-txt">
                             <em class="word" style="color:#888888;">第三方登录</em>
@@ -91,7 +109,7 @@
                             <a href="/connectnew.aspx" class="icon penguin-icon"></a>
                         </div>
                     </div>
-                    <script type="text/javascript">
+                    <!-- <script type="text/javascript">
                         var UserName = document.getElementById("UserName");
                         var hfUserName = document.getElementById("hfUserName");
                         var Password = document.getElementById("Password");
@@ -126,7 +144,7 @@
                         if (txtCode) txtCode.onkeydown = UserName.onkeydown;
                         if (UserName.value) Password.focus();
                         else UserName.onblur();
-                    </script>
+                    </script> -->
                 </fieldset>
             </div>
             
