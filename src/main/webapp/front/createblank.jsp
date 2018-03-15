@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!doctype html>
 <html>
 <head>
@@ -18,7 +22,7 @@
         <div class="BS-box" style="text-align:left;">
             <div id="ctl01_ContentPlaceHolder1_divCss">
             </div>
-            <form name="aspnetForm" method="post" action="createblank.aspx" id="aspnetForm">
+            <form name="aspnetForm" method="post" action="addSurvey.jsp" id="aspnetForm">
             	<div>
 					<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
 				</div>
@@ -67,7 +71,7 @@
                                 <div class="details-wrapper">
                                 	<div class="details-title">选择模板</div>
                             		<div class="details-info">使用问卷星提供的专业模板</div>
-                            		<a href="" class="btn btn-default btn-nobg main__btn--new">创建</a>
+                            		<a href="addSurvey.jsp" class="btn btn-default btn-nobg main__btn--new">创建</a>
                                 </div>
                             </div>
                             <div class="figure pull-left" >
@@ -96,5 +100,24 @@
     <div style="display:none;">
     
     </div>
+    
+    <script type="text/javascript" src="../js/jQuery-3.3.0-min.js"></script>
+    <script>
+    var createQuestion = $("#ctl01_ContentPlaceHolder1_lbtnNextStep");
+    var questionName = $.trim( $("#ctl01_ContentPlaceHolder1_txtQName").val() );
+    createQuestion.click(function(){
+    	if(questionName == ""){
+    		alert("请输入问卷名称");
+    		
+    		return;
+    	}else{
+    		location.href="addSurvey.jsp?questionName="+questionName;
+    		$.post("addSurvey",{wcxsname:questionName},function(data){
+    			
+    		},"text")
+    	}
+    })
+    
+    </script>
 </body>
 </html>

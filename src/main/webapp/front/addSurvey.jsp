@@ -7,6 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
         <title>添加问卷项</title>
         <link type="text/css" rel="stylesheet" href="css/add.css"/>
+        <link type="">
         <style type="text/css">
             *{margin:0;padding:0;}
             body,ul,li,ol,dl,dd,p,h1,h2,h3,h4,h5,h6{ margin:0;}
@@ -186,6 +187,8 @@
             </div>
         </div>
         <div id="voteManage" class="box">
+        
+       <div id="surveyTitle"><%= request.getParameter("wcxsname") %></div>
 	    <div id="content">
 	    	<form id="myform">
 	        	<dl>
