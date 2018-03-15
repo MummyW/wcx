@@ -230,7 +230,28 @@ dt.user-icon {
                     <dl class="user-info pull-left">
                     	<dt class="icon user-icon"><em></em></dt>
                         <dd class="spinner-list">
-                        	<a href="javascript:void(0)" class="user-name"><span id="ctl01_lblUserName" style="text-align:center">18616382395</span><span class="caret"></span></a>
+                        	
+	                        <c:if test="${not empty currentLoginUser }">
+								<%-- <li id="loginInfo">
+									<a href="javascript:void(0)">&nbsp;${currentLoginUser.wcxuname }</a>
+								</li> --%>
+								<a href="javascript:void(0)" class="user-name">
+	                        		<span id="ctl01_lblUserName" style="text-align:center">${currentLoginUser.wcxuname }</span>
+	                        		<span class="caret"></span>
+	                        	</a>
+							</c:if>
+	                        
+                        	<%-- <c:if test="${not empty currentLoginLeaguer }">
+								<li id="loginInfo">
+									<a href="javascript:void(0)">&nbsp;${currentLoginLeaguer.lname }</a>
+								</li>
+							</c:if>
+							<c:if test="${empty currentLoginLeaguer }">
+								<li id="loginInfo">
+									<a href="javascript:showLoginDiv()" id="currentloginUser">登录</a>
+								</li>
+							</c:if> --%>
+                            
                             <ul style="width:100px">
                             	<span class="caret-inverted"></span>
                                 <li><a href="/newwjx/manage/userinfo.aspx">用户信息</a></li>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="wcxhome_head" style="position: fixed;">
 	<div class="inner clearfixed">
 		<a href="javascript:void(0)" class="left fl"><img
@@ -15,7 +15,7 @@
 					</span> <span class="line"></span>
 				</a>
 					<ul class="subnav">
-						<li><a href="front/survey.html"><img
+						<li><a href="front/login.jsp"><img
 								src="img/survey_orange.png" alt=""><span>问卷调查</span></a></li>
 						<li><a href="javascript:void(0)"><img
 								src="img/360_orange.png" alt=""><span>360度评估</span></a></li>
@@ -34,15 +34,27 @@
 						class="line"></span></a></li>
 			</ul>
 			<ul class="wcxhome_btn fr">
-				<c:choose>
+				<%-- <c:choose>
 					<c:when test="${ empty currentMemberInfo.mname  }">
 						<li id="Register"><a href="front/wenchaxinglogin.html"
 							target="_blank" id="login" class="transition">登录</a></li>
-						<li><a href="front/register.jsp" target="_blank">注册</a></li>
+						<li><a href="front/register.html" target="_blank">注册</a></li>
 					</c:when>
-				</c:choose>
-
-
+						
+					<!-- <c:otherwise>
+                        		<li id="loginBack"><a href="javascript:void(0)" target="_blank" id="loginBack" class="loginBack">进入管理后台</a></li>
+                        	</c:otherwise> -->
+				</c:choose> --%>
+				
+				<c:if test="${ empty currentLoginUser }">
+					<li id="Register"><a href="front/wenchaxinglogin.html"
+							target="_blank" id="login" class="transition">登录</a></li>
+					<li><a href="front/register.html" target="_blank">注册</a></li>
+				</c:if>
+				
+				<c:if test="${not empty currentLoginUser}">
+					<li id="loginBack"><a href="front/myquestionnaires.jsp" target="_blank" id="loginBack" class="loginBack" style="width:100px;padding-top:5px;">进入管理后台</a></li>
+				</c:if>
 
 			</ul>
 		</div>
