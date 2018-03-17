@@ -24,9 +24,8 @@ public class UserInfoBizImpl implements IUserInfoBiz{
 			return null;
 		}else{
 			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("uname", uname);
-			map.put("pwd", pwd);
-			System.out.println(map);
+			map.put("wcxupwd", pwd.toString());
+			map.put("wcxuname", uname.toString());
 			return (UserInfo)this.baseDao.find(UserInfo.class, map, "userLogin");
 		}
 	}

@@ -28,4 +28,12 @@ public class SurveyController {
 	 Gson gson = new Gson();
 	 return gson.toJson(1);
 	}
+	
+	@RequestMapping("/front/commitSurvey")
+	@ResponseBody
+	public String commitSurvey(HttpSession session ,Survey survey){
+		
+	 Gson gson = new Gson();
+	 return gson.toJson(1);
+	}
 }

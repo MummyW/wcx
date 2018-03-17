@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.wcx.bean.UserInfo;
 import com.wcx.biz.IUserInfoBiz;
+import com.wcx.util.MD5Encryption;
 
 @Controller
 public class UserInfoController {
@@ -19,14 +20,15 @@ public class UserInfoController {
 	
 	@RequestMapping("/front/userLogin")
 	@ResponseBody
-	public String userLogin(HttpSession session,String uname,String pwd){
-		UserInfo userInfo = this.userInfoBiz.userInfoLogin(uname, pwd);
+	public String userLogin(HttpSession session,UserInfo userInfo){
+		userInfo.setWcxupwd(MD5Encryption.createPassword(userInfo.getWcxupwd()));
+		UserInfo user = this.userInfoBiz.userInfoLogin(userInfo.getWcxuname(), userInfo.getWcxupwd());;
 		Gson gson = new Gson();
-		if(userInfo == null){
+		if(user == null){
 			return gson.toJson(null);
 		}else{
-			session.setAttribute("currentLoginUser", userInfo);
-			return gson.toJson(userInfo);
+			session.setAttribute("currentLoginUser", user);
+			return gson.toJson(user);
 		}
 	}
 	

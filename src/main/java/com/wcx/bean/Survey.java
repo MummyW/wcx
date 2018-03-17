@@ -1,6 +1,7 @@
 package com.wcx.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 调查表
@@ -9,13 +10,13 @@ import java.io.Serializable;
  */
 public class Survey implements Serializable{
 	private static final long serialVersionUID = 6312079692606098003L;
-	private int wcxsid;        //调查表id
-	 private int wcxuid;				//用户的用户ID
+private int wcxsid;        			//调查表id
+	 private int wcxuid;			//用户的用户ID
      private String wcxsname;      //调查表名
      private int wcxtid;           //模板分类id
-     private String wcxintroduce;           //简介
+     private String wcxintroduce;  //简介
      private String wcxbdate;     //发表日期
-     private String wcxtime;             //截止日期
+     private Date wcxtime;             //截止日期
      private int status;            //状态 
      
 	@Override
@@ -29,18 +30,6 @@ public class Survey implements Serializable{
 		super();
 	}
 
-	public Survey(int wcxsid, int wcxuid, String wcxsname, int wcxtid, String wcxintroduce, String wcxbdate,
-			String wcxtime, int status) {
-		super();
-		this.wcxsid = wcxsid;
-		this.wcxuid = wcxuid;
-		this.wcxsname = wcxsname;
-		this.wcxtid = wcxtid;
-		this.wcxintroduce = wcxintroduce;
-		this.wcxbdate = wcxbdate;
-		this.wcxtime = wcxtime;
-		this.status = status;
-	}
 
 	public int getWcxsid() {
 		return wcxsid;
@@ -90,11 +79,25 @@ public class Survey implements Serializable{
 		this.wcxbdate = wcxbdate;
 	}
 
-	public String getWcxtime() {
+
+	public Survey(int wcxsid, int wcxuid, String wcxsname, int wcxtid,
+			String wcxintroduce, String wcxbdate, Date wcxtime, int status) {
+		super();
+		this.wcxsid = wcxsid;
+		this.wcxuid = wcxuid;
+		this.wcxsname = wcxsname;
+		this.wcxtid = wcxtid;
+		this.wcxintroduce = wcxintroduce;
+		this.wcxbdate = wcxbdate;
+		this.wcxtime = wcxtime;
+		this.status = status;
+	}
+
+	public Date getWcxtime() {
 		return wcxtime;
 	}
 
-	public void setWcxtime(String wcxtime) {
+	public void setWcxtime(Date wcxtime) {
 		this.wcxtime = wcxtime;
 	}
 

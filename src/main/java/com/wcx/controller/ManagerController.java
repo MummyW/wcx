@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.wcx.bean.Manager;
-import com.wcx.biz.WcxmanagerBiz;
+import com.wcx.biz.IWcxmanagerBiz;
 
 @Controller
 public class ManagerController {
 	@Autowired
-	private WcxmanagerBiz wcxmanagerBiz;
+	private IWcxmanagerBiz wcxmanagerBiz;
 	
 	@RequestMapping("/back/managerLogin")
 	@ResponseBody

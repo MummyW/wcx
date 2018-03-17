@@ -1,234 +1,332 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%
+	pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
 <!DOCTYPE html>
 <html lang="zh-Hans-CN">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <title>添加问卷项</title>
-        <link type="text/css" rel="stylesheet" href="css/add.css"/>
-        <link rel="icon" href="../img/wlogo.png"/>
-        <link type="">
-        <style type="text/css">
-            *{margin:0;padding:0;}
-            body,ul,li,ol,dl,dd,p,h1,h2,h3,h4,h5,h6{ margin:0;}
-            a{text-decoration:none;}
-            img{border:none;}
-            ol,ul{list-style:none;}
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>添加问卷项</title>
+<link type="text/css" rel="stylesheet" href="css/add.css" />
+<link rel="icon" href="../img/wlogo.png" />
+<link type="">
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body, ul, li, ol, dl, dd, p, h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	border: none;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+/*选择等级*/
+#box {
+	position: relative;
+	margin: 0 auto;
+	width: 610px;
+	height: 100px;
+	font-size: 20px;
+	line-height: 100px;
+	background: #fff;
+	padding: 30px 0 30px 0;
+	
+	margin-bottom:10px;
+}
+
+#box:hover {
+	box-shadow:-20px 0 10px 0 #ff6700; 
+}
+
+.title {
+	position: relative;
+	margin: 0 auto;
+	width: 610px;
+	height: 100px;
+	font-size: 20px;
+	line-height: 100px;
+	background: #fff;
+	padding: 30px 0 30px 0;
+	
+	margin-bottom:10px;
+}
+
+.title:hover {
+	box-shadow:-20px 0 10px 0 #ff6700; 
+}
+
+#box .left {
+	position: absolute;
+	left: 0px;
+	top: 5px;
+	color: red;
+	height: 30px;
+}
+
+#box .right {
+	position: absolute;
+	left: 200px;
+	top: 5px;
+	color: red;
+	height: 30px;
+}
+
+#box ul {
+	position: absolute;
+	left: 80px;
+	top: 6px;
+	margin: 40px 10px 0 10px;
+	width: 100px;
+	height: 20px;
+}
+
+#box ul li {
+	float: left;
+	width: 20px;
+	height: 20px;
+	background: url(../image/starcontent.png);
+	cursor: pointer;
+}
+
+#box ul li.on {
+	background-position: 0 -28px;
+}
+
+#box .surveycontent {
+	position: absolute;
+	top: 70px;
+	margin-top: 10px;
+	line-height: 20px;
+}
+
+#box .problem {
+	position: absolute;
+	top: 5px;
+	height: 35px;
+	line-height: 35px;
+	width: 100%;
+}
+
+.title .left {
+	position: absolute;
+	left: 0px;
+	top: 5px;
+	color: red;
+	height: 30px;
+}
+
+.title .right {
+	position: absolute;
+	left: 200px;
+	top: 5px;
+	color: red;
+	height: 30px;
+}
+
+.title ul {
+	position: absolute;
+	left: 80px;
+	top: 6px;
+	margin: 40px 10px 0 10px;
+	width: 100px;
+	height: 20px;
+}
+
+.title ul li {
+	float: left;
+	width: 20px;
+	height: 20px;
+	background: url(../image/starcontent.png);
+	cursor: pointer;
+}
+
+.title ul li.on {
+	background-position: 0 -28px;
+}
+
+.title .surveycontent {
+	position: absolute;
+	top: 70px;
+	margin-top: 10px;
+	line-height: 20px;
+}
+
+.title .problem {
+	position: absolute;
+	top: 5px;
+	height: 35px;
+	line-height: 35px;
+	width: 100%;
+}
+
+.div_ins_question {
+	position: absolute;
+	padding-top: 0px;
+	bottom: 0;
+	color: #666666;
+	padding-left: 200px;
+	line-height: 18px;
+	border-bottom: 1px solid #333;
+	clear: both;
+}
+
+#wrap {
+	text-align: left;
+	opacity: 1;
+	width: 920px;
+	background: url(../image/oldbg2.jpg) no-repeat top center;
+	margin: 0 auto;
+	padding-top: 105px;
+}
+
+#surveyTitle {
+	margin: 4px auto;
+	height: 100px;
+	line-height: 39px;
+	padding: 2px;
+	background: #fff;
+	color: #ff6700;
+	width: 610px;
+	border-bottom: 4px dashed #333;
+	font-size: 40px;
+	font-style: italic;
+	font-weight: bold;
+	text-align: center;
+}
+
+.description input {
+	width: 100%;
+	height: 40px;
+	display: block;
+}
+</style>
+
+</head>
+<script type="text/javascript" src="${APP_PATH }/js/jQuery-3.3.0-min.js"></script>
+<link
+	href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<body style="background: #ddf4ff url(../image/oldbg2-bg.jpg) repeat-x;">
+	<div id="wrap"></div>
+
+	<!-- 标题 -->
+	<div id="surveyTitle"><%= session.getAttribute("wcxsname") %>
+		<p class="description">
+			<input class="wcxintroduce" placeholder="请输入描述信息">
+		</p>
+	</div>
 
 
-            /*选择等级*/
-        #box{
-            position: relative;
-            margin: 0 auto;
-            width: 610px;
-            height:100px;
-            font-size: 20px;
-            line-height: 100px;
-            background:#fff;
-            padding:30px 0 30px 0;
-        }
-        #box:hover{border:1px solid #ff6700;}
-        
-         .title{
-            position: relative;
-            margin: 0 auto;
-            width: 610px;
-            height:100px;
-            font-size: 20px;
-            line-height: 100px;
-            background:#fff;
-            padding:30px 0 30px 0;
-        }
-        .title:hover{border:1px solid #ff6700;}
-        
-        
-        #box .left{
-            position: absolute;
-            left:0px;
-            top:5px;
-            color: red;
-            height:30px;
-        }
-        #box .right{
-            position: absolute;
-            left:200px;
-            top:5px;
-            color: red;
-            height:30px;
-        }
+	<div id="box">
+		<p class="problem" contenteditable="true">1.你对你小组长的评价: (点击可修改问题)</p>
+		<span class="left">很不满意</span>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<span class="right">满意</span>
+		<p class="surveycontent">提示: 请认真给当前文章打分!</p>
+		<div class="div_ins_question"></div>
+		<div class="div_edit_question" style=""></div>
+	</div>
 
-        #box ul{
-            position: absolute;
-            left:80px;
-            top:6px;
-            margin:40px 10px 0 10px;
-            width: 100px;
-            height: 20px;
-        }
-        #box ul li{
-            float: left;
-            width: 20px;
-            height: 20px;
-			background:url(../image/starcontent.png);
-            cursor:pointer;
-        }
-        #box ul li.on{
-            background-position: 0 -28px;
-        }
+	<div class="title">
+		<p class="problem" contenteditable="true">2.你对你女朋友的评价: (点击可修改问题)</p>
+		<span class="left">很不满意</span>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<span class="right">满意</span>
+		<p class="surveycontent">提示: 请认真给当前文章打分!</p>
+		<div class="div_ins_question"></div>
+		<div class="div_edit_question" style=""></div>
+	</div>
+	<div id="voteManage" class="box ">
 
-        #box .surveycontent{
-            position: absolute;
-            top:70px;
-            margin-top: 10px;
-            line-height: 20px;
-        }
-        #box .problem{
-            position: absolute;
-            top:5px;height:35px;
-            line-height:35px;
-            width:100%;
-        }
-        .title .left{
-            position: absolute;
-            left:0px;
-            top:5px;
-            color: red;
-            height:30px;
-        }
-        .title .right{
-            position: absolute;
-            left:200px;
-            top:5px;
-            color: red;
-            height:30px;
-        }
+		<div id="content">
+			<form id="myform">
+				<dl>
+					<dt>投票内容：</dt>
+					<dd>
+						<input id="title" class="input-text" type="text" name="title">
+					</dd>
+					<dt>投票类型：</dt>
+					<dd>
+						<input type="radio" value="1" checked="checked" name="type">单选
+						<input type="radio" value="2" name="type">多选
+					</dd>
+					<dt>投票选项：</dt>
+					<dd id="voteoptions">
+						<p>
+							<input class="input-text" type="text" name="options">
+						</p>
+						<p>
+							<input class="input-text" type="text" name="options">
+						</p>
+					</dd>
+					<dt></dt>
+					<dd class="button">
+						<a
+							style="background: url(../image/button_submit.gif) no-repeat; display: inline-block; float: left; width: 76px; height: 31px"
+							href="javascript:addVoting()"></a> <a onclick="AddOption()"
+							href="javascript:void(0);">增加选项</a> <a href="#">取消操作</a>
+					</dd>
+				</dl>
+			</form>
+		</div>
+	</div>
 
-        .title ul{
-            position: absolute;
-            left:80px;
-            top:6px;
-            margin:40px 10px 0 10px;
-            width: 100px;
-            height: 20px;
-        }
-        .title ul li{
-            float: left;
-            width: 20px;
-            height: 20px;
-			background:url(../image/starcontent.png);
-            cursor:pointer;
-        }
-        .title ul li.on{
-            background-position: 0 -28px;
-        }
 
-        .title .surveycontent{
-            position: absolute;
-            top:70px;
-            margin-top: 10px;
-            line-height: 20px;
-        }
-        .title .problem{
-            position: absolute;
-            top:5px;height:35px;
-            line-height:35px;
-            width:100%;
-        }
-        .div_ins_question {
-            position: absolute;
-            padding-top:0px;
-            bottom:0;
-            color: #666666;
-            padding-left: 200px;
-            line-height: 18px;
-            border-bottom:1px solid #333;
-            clear: both;
-        }
-        #wrap{text-align: left;opacity: 1;width: 920px;background:url(../image/oldbg2.jpg) no-repeat top center;margin:0 auto;padding-top: 105px;}
-		#surveyTitle{margin: 4px auto;height: 100px;line-height: 39px;padding: 2px; background: #fff;color: #ff6700;width: 610px;border-bottom: 4px dashed #333;font-size: 40px;font-style: italic;font-weight: bold;    text-align: center;}
-		.description input{    width: 100%;height: 40px;display: block; }
-		
-        </style>
-    </head>
-    <body style="background:#ddf4ff url(../image/oldbg2-bg.jpg) repeat-x;">
-        <div id="wrap"></div>
-        
-        <!-- 标题 -->
-        <div id="surveyTitle"><%= session.getAttribute("wcxsname") %>
-        	<p class="description" ><input placeholder="请输入描述信息"></p>
-        </div>
-        
-        
-        <div id="box">
-            <p class="problem" contenteditable="true" >1.你对你小组长的评价: </p>
-            <span class="left">很不满意</span>
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <span class="right">满意</span>
-            <p class="surveycontent">提示: 请认真给当前文章打分!</p>
-            <div class="div_ins_question"></div>
-            <div class="div_edit_question" style="none">
 
-            </div>
-        </div>
-        
-         <div class="title">
-            <p class="problem" contenteditable="true" >2.你对你女朋友的评价: </p>
-            <span class="left">很不满意</span>
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <span class="right">满意</span>
-            <p class="surveycontent">提示: 请认真给当前文章打分!</p>
-            <div class="div_ins_question"></div>
-            <div class="div_edit_question" style="none">
+	<div id="addElement" style="display: none;"></div>
+	<div style="margin: 0 auto; width: 400px;" id="edit">
+		<button type="button" class="btn btn-success">完成编辑</button>
+		<button type="button" class="btn btn-info" id="optionsAddition">添加可选问题</button>
+		<button type="button" class="btn btn-info">添加评分问题</button>
+	</div>
 
-            </div>
-        </div>
-        <div id="voteManage" class="box">
-        
-	    <div id="content">
-	    	<form id="myform">
-	        	<dl>
-	                <dt>投票内容：</dt>
-	                <dd>
-	                	<input id="title" class="input-text" type="text" name="title">
-	                </dd>
-	                <dt>投票类型：</dt>
-	                <dd>
-	                	<input type="radio" value="1" checked="checked" name="type">单选
-	                    <input type="radio" value="2" name="type">多选
-	                </dd>
-	                <dt>投票选项：</dt>
-	                <dd id="voteoptions">
-	                	<p>
-	                    	<input class="input-text" type="text" name="options">
-	                    </p>
-	                    <p>
-	                    	<input class="input-text" type="text" name="options">
-	                    </p>
-	                </dd>
-	                <dt></dt>
-	                <dd class="button">
-	                	<a style="background: url(../image/button_submit.gif) no-repeat;display: inline-block;float: left;width: 76px;height: 31px" href="javascript:addVoting()"></a>
-	                    <a onclick="AddOption()" href="javascript:void(0);">增加选项</a>
-	                    <a href="#">取消操作</a>
-	                </dd>
-	            </dl>
-	        </form>
-	    </div>
-</div>
-    <script>
+	<script src="js/jquery-1.9.1.js"></script>
+	<script>
+    	
+    
+    	
+    	var commit = $(".btn-info");
+    	$(commit)[0].click(function(){
+    		var wcxintroduce = $(".wcxintroduce")[0].val();
+    		var wcxsname = $("#surveyTitle").val();
+    		if(wcxintroduce == ""){
+    			alert("请介绍您的问卷~");
+    			return;
+    		}
+    		$.post("commitSurvey",{wcxsname:wcxsname,wcxintroduce:wcxintroduce,wcxtime:wcxtime},function(data){
+    			
+    		},"text");
+    	})
+    
+    	
         var aLi = document.querySelectorAll("#box ul li"),
             oP = document.querySelector("#box .surveycontent"),
             oUl = document.querySelector("#box ul"),
@@ -261,6 +359,17 @@
             };
         };
 
+        
+        
+        //添加问题
+        $("#optionsAddition").click(function(){
+        	console.log($("#voteMange").clone())
+        	
+        	var copy = $("#voteMange").clone();
+        	$("#addElement").insertBefore(copy);
+        });
+        
+        
         var isIE = !!document.all;
         function AddOption()
         {
@@ -283,6 +392,8 @@
         	_p.appendChild(_a);
         	voteoptions.appendChild(_p);
         }
+        
+        
         function DelOption(e)
         {
         	if(!e) e = window.event;
@@ -291,5 +402,5 @@
         	obj.parentNode.removeChild(obj);
         }
     </script>
-    </body>
+</body>
 </html>

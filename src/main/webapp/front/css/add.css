@@ -5,6 +5,12 @@
     width: 600px;
 	background:#fff;
 }
+
+#voteManage:hover{
+	box-shadow:-20px 0 10px 0 #ff6700; 
+}
+
+
 #voteManage dl {
     line-height: 40px;
 }

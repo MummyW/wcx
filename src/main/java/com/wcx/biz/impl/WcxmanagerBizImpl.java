@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wcx.bean.Manager;
-import com.wcx.biz.WcxmanagerBiz;
+import com.wcx.biz.IWcxmanagerBiz;
 import com.wcx.dao.BaseDao;
 import com.wcx.util.MD5Encryption;
 import com.wcx.util.StringUtil;
 
 @Service
 @SuppressWarnings({"rawtypes","unchecked"})
-public class WcxmanagerBizImpl implements WcxmanagerBiz{
+public class WcxmanagerBizImpl implements IWcxmanagerBiz{
 	@Autowired
 	private BaseDao baseDao;
 

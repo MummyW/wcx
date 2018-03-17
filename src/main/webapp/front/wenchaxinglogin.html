@@ -32,7 +32,7 @@
     			return;
     		}
     		//alert(uname + pwd);
-    		$.post("userLogin",{uname:uname,pwd:pwd},function(data){
+    		$.post("userLogin",{wcxuname:uname,wcxupwd:pwd},function(data){
     			if(data!="" && data!=null){
     				window.location.href="../index.jsp";
     			}else{
@@ -61,7 +61,7 @@
             </a>
             <div class="member pull-right">
                 <a href="login.jsp" class="btn btn-default btn-lg pull-left login hidden" rel="nofollow">登入</a>
-                <a href="register.html" class="btn btn-default btn-lg pull-left register " rel="nofollow">注册</a>
+                <a href="register.jsp" class="btn btn-default btn-lg pull-left register " rel="nofollow">注册</a>
                 <a href="../index.jsp" class="btn btn-default btn-lg pull-left back-wjx">返回首页</a>
             </div>
         </div>
@@ -109,42 +109,6 @@
                             <a href="/connectnew.aspx" class="icon penguin-icon"></a>
                         </div>
                     </div>
-                    <!-- <script type="text/javascript">
-                        var UserName = document.getElementById("UserName");
-                        var hfUserName = document.getElementById("hfUserName");
-                        var Password = document.getElementById("Password");
-                        var LoginButton = document.getElementById("LoginButton");
-                        var txtCode = document.getElementById("txtCode");
-                        var hrefGetCode = document.getElementById("hrefGetCode");
-                        function getCode() {
-                            if (!UserName.value) {
-                                alert("请先输入用户名"); UserName.focus(); return;
-                            }
-                            txtCode.focus();
-                            PDF_launch("/register/getcode.aspx?username=" + encodeURIComponent(hfUserName.value), 500, 150, codeCallBack);
-                        }
-                        function codeCallBack() {
-                            txtCode.focus();
-                        }
-                        String.prototype.dbc2sbc = function () {
-                            return this.replace(/[\uff01-\uff5e]/g, function (a) { return String.fromCharCode(a.charCodeAt(0) - 65248); }).replace(/\u3000/g, " ");
-                        }
-                        UserName.onkeypress = Password.onkeypress = function (e) {
-                            e = e || window.event;
-                            if (e && e.keyCode == 13) {
-                                LoginButton.click();
-                            }
-                        }
-                        UserName.onblur = UserName.onchange = function () {
-                            var str = this.value;
-                            var newstr = str.dbc2sbc();
-                            if (str != newstr) this.value = newstr;
-                            UserName.value = newstr;
-                        }
-                        if (txtCode) txtCode.onkeydown = UserName.onkeydown;
-                        if (UserName.value) Password.focus();
-                        else UserName.onblur();
-                    </script> -->
                 </fieldset>
             </div>
             

@@ -15,7 +15,7 @@
 					</span> <span class="line"></span>
 				</a>
 					<ul class="subnav">
-						<li><a href="front/login.jsp"><img
+						<li><a href="front/createblank.jsp"><img
 								src="img/survey_orange.png" alt=""><span>问卷调查</span></a></li>
 						<li><a href="javascript:void(0)"><img
 								src="img/360_orange.png" alt=""><span>360度评估</span></a></li>
