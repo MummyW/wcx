@@ -23,15 +23,12 @@ public class WcxmanagerBizImpl implements IWcxmanagerBiz{
 	 */
 	@Override
 	public Manager managerLogin(String wcxmname, String wcxmpwd) {
-		System.out.println(wcxmname);
-		if(StringUtil.isNull(wcxmname,wcxmpwd)){                                        //判断字符串是否为空
+		if(StringUtil.isNull(wcxmname,wcxmpwd)){//判断字符串是否为空
 			return null;
 		}else{
 			Map<String, Object> map=new HashMap<String,Object>();
 			map.put("wcxmname", wcxmname);
-			//wcxmpwd=MD5Encryption.createPassword(wcxmpwd);
 			map.put("wcxmpwd", wcxmpwd);
-			System.out.println(map);
 
 			return (Manager) this.baseDao.find(Manager.class, map,"managerLogin");
 		}

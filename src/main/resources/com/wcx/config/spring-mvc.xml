@@ -45,6 +45,7 @@
 			<mvc:mapping path="/back/css/*"/>
 			<mvc:mapping path="/back/images/*"/>
 			<mvc:mapping path="/back/js/*"/>
+			<!-- <mvc:mapping path="/front/createblank.jsp"/> -->
 			<bean class="com.wcx.interceptor.CheckLoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

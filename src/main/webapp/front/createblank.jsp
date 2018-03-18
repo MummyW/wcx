@@ -5,6 +5,10 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
 pageContext.setAttribute("APP_PATH",request.getContextPath());
+
+if(session.getAttribute("currentLoginUser") == null || session.getAttribute("currentLoginUser")=="" ){
+	
+}
 %>
 <!doctype html>
 <html>
@@ -94,23 +98,24 @@ pageContext.setAttribute("APP_PATH",request.getContextPath());
                         </div>
                     </div>
                 </div>
-                <script type="text/javascript"></script>
             </form>
         </div>
     </div>
     <div style="display:none;">
     
     </div>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
     
-    <script type="text/javascript" src="${APP_PATH }/js/jQuery-3.3.0-min.js"></script>
-    <script>
     var createQuestion = $("#ctl01_ContentPlaceHolder1_lbtnNextStep");
     
-   
      $(createQuestion).click(function(){
     	 if($.trim( $("#ctl01_ContentPlaceHolder1_txtQName").val() )  == ""){
      		alert("请输入问卷名称");
      		return;
+     	}else if($("#ctl01_lblUserName").text()==''  ){
+     		alert('请先登录');
+     		location.href="login.html";
      	}else{
 		    var questionName = $.trim( $("#ctl01_ContentPlaceHolder1_txtQName").val() );
      		

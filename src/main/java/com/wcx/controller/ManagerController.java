@@ -19,10 +19,7 @@ public class ManagerController {
 	@RequestMapping("/back/managerLogin")
 	@ResponseBody
 	public String managerLogin(HttpSession session,String wcxmname,String wcxmpwd){
-		System.out.println(wcxmname);
-		System.out.println(wcxmpwd);
 		Manager manager=this.wcxmanagerBiz.managerLogin(wcxmname, wcxmpwd);
-		System.out.println(manager);
 		Gson gson=new Gson();
 		if(manager==null){
 			return gson.toJson(null);

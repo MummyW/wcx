@@ -34,6 +34,10 @@
 #voteManage dl dd.button a {
     margin: 0 10px;
 }
+
+.w600{
+	width:600px;
+}
 .box {
     border: 2px solid #79a4cf;
 }

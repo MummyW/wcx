@@ -18,14 +18,14 @@
 <link rel="stylesheet" type="text/css" href="css/wjxmaster.css" />
 
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-<link id="ctl00_hrefMobile" rel="alternate"
+<!-- <link id="ctl00_hrefMobile" rel="alternate"
 	media="only screen and(max-width: 640px)"
-	href="https://www.wjx.cn/mobile/app/survey.aspx" />
+	href="https://www.wjx.cn/mobile/app/survey.aspx" /> -->
 <meta name="applicable-device" content="pc" />
 <body>
+	 <jsp:include page="jsp/index_head.jsp"></jsp:include>
 	<div class="wjxhome__wrapper" id="BS">
 
-	 <jsp:inclue src="jsp/index_head.jsp"></jsp:inclue>
 		<div id="divoutbox" style="">
 
 			<link rel="stylesheet" type="text/css" href="css/application1.css" />

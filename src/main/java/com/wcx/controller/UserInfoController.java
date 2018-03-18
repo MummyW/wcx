@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.wcx.bean.UserInfo;
 import com.wcx.biz.IUserInfoBiz;
+import com.wcx.helper.DataHelper;
 import com.wcx.util.MD5Encryption;
 
 @Controller
@@ -28,6 +29,9 @@ public class UserInfoController {
 			return gson.toJson(null);
 		}else{
 			session.setAttribute("currentLoginUser", user);
+			//存储到后端的缓存中
+			DataHelper.setLoginUserInfo(user);
+			
 			return gson.toJson(user);
 		}
 	}
@@ -37,6 +41,13 @@ public class UserInfoController {
 	public Integer userReg(UserInfo userInfo){
 		int result = this.userInfoBiz.userReg(userInfo);
 		return result;
-		
 	}
+	
+	@RequestMapping("/front/invaild")
+	@ResponseBody
+	public Integer userReg(HttpSession session){
+		session.invalidate();
+		return 1;
+	}
+	
 }

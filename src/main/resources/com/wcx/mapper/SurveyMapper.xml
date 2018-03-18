@@ -2,13 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.wcx.mapper.SrveyMapper">
+<mapper namespace="com.wcx.mapper.SurveyMapper">
 	<!-- 添加 -->
 	<insert id="addSurvey" parameterType="Survey">
-		<selectKey keyProperty="wcxsid" keyColumn="wcxsid" resultType="Integer" order="BEFORE">
-			select seq_wenchaxingsurvey_wcxsid.nextval from dual
+		<selectKey  keyProperty="wcxsid"
+			keyColumn="wcxsid" resultType="Integer" order="BEFORE">
+			select
+			seq_wenchaxingsurvey_wcxsid.nextval
+			from dual
 		</selectKey>
-			insert into wenchaxingsurvey(wcxsid,wcxsname,wcxtid,wcxintroduce,wcxbdate,wcxtime,status) values(#{wcxsid},#{wcxsname},1,#{wcxintroduce},sysdate,#{wcxtime})
+		insert into
+		wenchaxingsurvey(wcxsid,wcxuid,wcxsname,wcxtid,wcxintroduce,wcxpublishdate,wcxfinishdate,status)
+		values(#{wcxsid},#{wcxuid},#{wcxsname},1,#{wcxintroduce},to_date(#{wcxpublishdate},'yyyy-mm-dd
+		hh24:mi:ss'),to_date(#{wcxfinishdate},'yyyy-mm-dd
+		hh24:mi:ss'),#{status})
 	</insert>
+	
 	
 </mapper>

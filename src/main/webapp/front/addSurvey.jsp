@@ -44,12 +44,11 @@ ol, ul {
 	line-height: 100px;
 	background: #fff;
 	padding: 30px 0 30px 0;
-	
-	margin-bottom:10px;
+	margin-bottom: 10px;
 }
 
 #box:hover {
-	box-shadow:-20px 0 10px 0 #ff6700; 
+	box-shadow: -20px 0 10px 0 #ff6700;
 }
 
 .title {
@@ -61,12 +60,11 @@ ol, ul {
 	line-height: 100px;
 	background: #fff;
 	padding: 30px 0 30px 0;
-	
-	margin-bottom:10px;
+	margin-bottom: 10px;
 }
 
 .title:hover {
-	box-shadow:-20px 0 10px 0 #ff6700; 
+	box-shadow: -20px 0 10px 0 #ff6700;
 }
 
 #box .left {
@@ -119,6 +117,7 @@ ol, ul {
 	height: 35px;
 	line-height: 35px;
 	width: 100%;
+	color: #918377
 }
 
 .title .left {
@@ -173,16 +172,7 @@ ol, ul {
 	width: 100%;
 }
 
-.div_ins_question {
-	position: absolute;
-	padding-top: 0px;
-	bottom: 0;
-	color: #666666;
-	padding-left: 200px;
-	line-height: 18px;
-	border-bottom: 1px solid #333;
-	clear: both;
-}
+
 
 #wrap {
 	text-align: left;
@@ -214,14 +204,14 @@ ol, ul {
 	display: block;
 }
 </style>
-
-</head>
-<script type="text/javascript" src="${APP_PATH }/js/jQuery-3.3.0-min.js"></script>
+<script type="text/javascript"
+	src="${APP_PATH }/static/js/jQuery-3.3.0-min.js"></script>
 <link
 	href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <script
 	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
 <body style="background: #ddf4ff url(../image/oldbg2-bg.jpg) repeat-x;">
 	<div id="wrap"></div>
 
@@ -245,7 +235,6 @@ ol, ul {
 		</ul>
 		<span class="right">满意</span>
 		<p class="surveycontent">提示: 请认真给当前文章打分!</p>
-		<div class="div_ins_question"></div>
 		<div class="div_edit_question" style=""></div>
 	</div>
 
@@ -265,11 +254,10 @@ ol, ul {
 		<div class="div_edit_question" style=""></div>
 	</div>
 	<div id="voteManage" class="box ">
-
 		<div id="content">
 			<form id="myform">
 				<dl>
-					<dt>投票内容：</dt>
+					<dt class="wcxselect">投票标题：</dt>
 					<dd>
 						<input id="title" class="input-text" type="text" name="title">
 					</dd>
@@ -300,34 +288,55 @@ ol, ul {
 	</div>
 
 
-
+	<form class="form-horizontal" style="margin:0 auto;width:600px;">
+	  <div class="form-group">
+	    <label for="inputEmail3" class="col-sm-2 control-label">问题3:</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control wcxcompletion"  placeholder="请输入问题">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="inputPassword3" class="col-sm-2 control-label">回答:</label>
+	    <div class="col-sm-10">
+	      <textarea class="form-control" rows="3"></textarea>
+	    </div>
+	  </div>
+	  
+	</form>
 	<div id="addElement" style="display: none;"></div>
 	<div style="margin: 0 auto; width: 400px;" id="edit">
-		<button type="button" class="btn btn-success">完成编辑</button>
+		<button type="button" class="btn btn-success" id="complete">完成编辑</button>
 		<button type="button" class="btn btn-info" id="optionsAddition">添加可选问题</button>
 		<button type="button" class="btn btn-info">添加评分问题</button>
 	</div>
 
 	<script src="js/jquery-1.9.1.js"></script>
 	<script>
-    	
-    
-    	
-    	var commit = $(".btn-info");
-    	$(commit)[0].click(function(){
-    		var wcxintroduce = $(".wcxintroduce")[0].val();
-    		var wcxsname = $("#surveyTitle").val();
+    		
+		//完成编辑,提交到后台去
+		$("#complete").click(function(){
+			var wcxintroduce = $(".wcxintroduce").val();
+    		var wcxsname = $.trim( $("#surveyTitle").text());
+    		
+    		var wcxtime = "2018-3-17";
     		if(wcxintroduce == ""){
     			alert("请介绍您的问卷~");
     			return;
     		}
-    		$.post("commitSurvey",{wcxsname:wcxsname,wcxintroduce:wcxintroduce,wcxtime:wcxtime},function(data){
-    			
+    		var date = new Date();
+    		var wcxbdate = "";
+    		var month = date.getMonth()+1;
+    		wcxbdate = ""+date.getFullYear()+"-"+month+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+    		$.post("commitSurvey",{wcxsname:wcxsname,wcxtid:1,wcxintroduce:wcxintroduce,wcxpublishdate:wcxbdate,wcxfinishdate:wcxtime,status:1},function(data){
+    			if(data == 1){
+    				location.href="myquestionnaires.jsp";
+    			}
     		},"text");
-    	})
+		})
+    	
     
     	
-        var aLi = document.querySelectorAll("#box ul li"),
+        /* var aLi = document.querySelectorAll("#box ul li"),
             oP = document.querySelector("#box .surveycontent"),
             oUl = document.querySelector("#box ul"),
             showIndex = -1,//代表最终的评分
@@ -357,13 +366,13 @@ ol, ul {
             for(j = 0; j <= x; j++){
                 aLi[j].className = "on";
             };
-        };
+        }; */
 
         
         
         //添加问题
         $("#optionsAddition").click(function(){
-        	console.log($("#voteMange").clone())
+        	console.log(typeof ( $("#voteMange").clone()  ))
         	
         	var copy = $("#voteMange").clone();
         	$("#addElement").insertBefore(copy);

@@ -2,12 +2,15 @@ package com.wcx.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.wcx.bean.Survey;
+import com.wcx.bean.UserInfo;
+import com.wcx.biz.IWCXSurveyBiz;
 
 /** 
  * @author 作者:Mummy QQ:1962978637 
@@ -19,21 +22,25 @@ import com.wcx.bean.Survey;
  */
 @Controller
 public class SurveyController {
-	
+
+	@Autowired
+	private IWCXSurveyBiz surveyService;
+
 	@RequestMapping("/front/addSurvey")
 	@ResponseBody
 	public String addSurvey(HttpSession session ,Survey survey){
-	 session.setAttribute("wcxsname",survey.getWcxsname());
-	 System.out.println(session.getAttribute("wcxsname"));
-	 Gson gson = new Gson();
-	 return gson.toJson(1);
+		session.setAttribute("wcxsname",survey.getWcxsname());
+		Gson gson = new Gson();
+		return gson.toJson(1);
 	}
-	
+
 	@RequestMapping("/front/commitSurvey")
 	@ResponseBody
 	public String commitSurvey(HttpSession session ,Survey survey){
-		
-	 Gson gson = new Gson();
-	 return gson.toJson(1);
+		UserInfo userInfo = (UserInfo)session.getAttribute("currentLoginUser");
+		survey.setWcxuid(userInfo.getWcxuid());
+		int result = surveyService.addSurvey(survey);
+		Gson gson = new Gson();
+		return gson.toJson(result);
 	}
 }
