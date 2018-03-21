@@ -1,0 +1,191 @@
+<table id="userinfo_data"></table>
+
+<script type="text/javascript">
+var adminEditRow = undefined;    //记录当前编辑的行的索引
+var adminOp;    //我们要返回到后台的值
+var adminFlag;
+var adminObj;    //通过这个对象来调用  adminObj.datagrid('', )   这个函数实现相关操作可以查看API寻找
+var userInfo;  //保存旧密码
+
+adminObj = $('#userinfo_data').datagrid({   
+    url:'../../userfindByPage', 
+    queryParams:{op:"userfindByPage"},
+    fitColumns:true,
+    pagination:true,
+    pageSize:5,
+    pageList:[5,10,15,20,25,30],
+    striped:true,
+    rownumbers:true,
+    sortName:"wcxuid",    //按照aid进行排序
+    remoteSort:false,
+    fit:true,
+    columns:[[   
+        {checkbox:true},
+        {field:'wcxuid',title:'用户id',width:100,align:'center',sortable:true},
+        /* {field:'wcxuid',title:'用户id',width:100,align:'center',editor:{type:"text",options:{required:true}}}, */
+        {field:'wcxuname',title:'用户姓名',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'wcxuemail',title:'用户邮箱',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'wcxualipay',title:'管理员支付宝',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        /* {field:'wcxuphoto',title:'用户头像',width:100,align:'center',editor:{type:"text",options:{required:true}}}, */
+        
+        {field:'wcxuphoto',title:'用户头像',width:100,align:'center',editor:{type:"text",options:{required:true}},formatter:function(val,row,index){
+        	wcxuphoto = "<img src='../../"+val+"' width='80px' height='80px' onclick='updateLeaguerPhoto()'>";
+     	   return wcxuphoto;
+        }},
+        
+        {field:'wcxupwd',title:'用户密码',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'wcxuqq',title:'用户QQ',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'wcxuwechat',title:'用户微信',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+    ]],
+    toolbar: [{
+    	text:"添加",
+		iconCls: 'icon-user-add',
+		handler: function(){
+			adminOp = "addUser";
+			adminFlag = "添加";
+			
+			if(adminEditRow != undefined){
+				adminObj.datagrid("rejectChanges");    //这个意思是回滚
+				adminEditRow = undefined;
+			}
+			adminObj.datagrid("insertRow",{index:0,row:{ } } );    //在指定位置插入行
+			adminObj.datagrid("beginEdit",0);     //指定位置开始编辑
+			adminEditRow = 0;
+		}
+	},'-',{
+		text:"修改",
+		iconCls: 'icon-user-edit',
+		handler: function(){
+			adminOp = "updateUPhoto";
+			adminFlag = "修改";
+			
+			if(adminEditRow != undefined){    //有正在被编辑的行
+				adminObj.datagrid("endEdit",adminEditRow);     //结束编辑
+				adminObj.datagrid("rejectChanges");
+				adminEditRow = undefined;
+			}
+			
+			var row = adminObj.datagrid("getChecked")[0];
+			oldPwd = row.pwd;
+
+			if(row == undefined){
+				$.messager.show({title:'温馨提示' , msg:'请选择您要修改的管理员信息 . . . ',timeout:2000,showType:'slide'});
+			}else{
+				var index = adminObj.datagrid("getRowIndex",row);
+				adminObj.datagrid("beginEdit",index);
+				adminEditRow = index;
+			}
+		}
+	},'-',{
+		text:"删除",
+		iconCls: 'icon-user-delete',
+		handler: function(){
+			var rows = adminObj.datagrid("getChecked");    //返回所有行的复选框已被选中。
+			console.info(rows);
+			if(rows.length <=0 ){
+				$.messager.show({title:'温馨提示' , msg:'请选择您要删除的管理员信息 . . . ' , timeout:2000 , showType:'slide'});
+			}else{
+				$.messager.confirm('删除确认' , '数据一旦删除将不能恢复，您确定要删除吗 . . .' , function(r){
+					if(r){
+						$.post("../../deleteUser",rows,function(data){
+							data = parseInt( $.trim(data) );
+							alert(data);
+							if(data>0){
+								$.messager.show( {title:"成功提示",msg:adminFlag+"管理员信息删除成功",timeout:2000,showType:'slide'} );
+								adminObj.datagrid("reload");
+							}else{
+								$.messager.alert("失败提示",adminFlag+"管理员信息删除失败 . . .","error");
+							}
+						},"text");
+					}
+				});
+			}
+		}
+		/* text : "删除",
+		iconCls : 'icon-remove',
+		handler : function() {
+		    var rows=adminObj.datagrid("getChecked");
+		    console.info(rows);
+			if(rows.length<=0){
+				$.messager.show({title:'温馨提示',msg:'请选择您要删除的用户信息...',timeout:2000,showType:'slide'});
+			}else{
+				$.messager.confirm('删除确认','数据一旦删除将不能恢复，您确认删除吗？', function(r){
+					if(r){
+						var wcxuids="";
+						for(var i=0,len=rows.length;i<len-1;i++){
+							wcxuids+=rows[i].wcxuid+",";
+						}
+							wcxuids+=rows[i].wcxuid;
+						
+						$.post("../../deleteUser",{op:"deleteUser",wcxuids:wcxuids},function(data){
+							if(data>0){
+								$.messager.show({title:'成功提示',msg:'用户信息删除成功...',timeout:2000,showType:'slide'});
+								adminObj.datagrid("reload");
+							}else{
+								adminObj.datagrid("rejectChanges");
+								$.messager.alert('失败提示','用户信息删除失败...','error');
+							}
+						},"text");
+					}
+				});
+			} 
+		} */
+	},'-',{
+		text:"保存",
+		iconCls: 'icon-user-tick',
+		handler: function(){
+			if(adminEditRow != undefined){
+				adminObj.datagrid("endEdit",adminEditRow);   //结束编辑
+				//获取用户编辑的第一行
+				var rows = adminObj.datagrid("getChanges")[0];
+				
+					console.info(rows);
+				if(rows!=undefined){
+					rows.op = adminOp;
+					
+
+					$.post("../../addUser",rows,function(data){
+						data = parseInt( $.trim(data) );
+						if(data>0){
+							$.messager.show( {title:"成功提示",msg:adminFlag+"用户信息添加成功",timeout:2000,showType:'slide'} );
+							adminObj.datagrid("reload");
+						}else{
+							$.messager.alert("失败提示",adminFlag+"用户信息添加失败 . . .","error");
+						}
+					},"text");
+				}
+			}
+		}
+	},'-',{
+		text:"撤销",
+		iconCls: 'icon-undo',
+		handler: function(){
+			adminFlag = "撤销";
+			
+			adminObj.datagrid("endEdit",adminEditRow);   //结束编辑
+			adminObj.datagrid("rejectChanges")   //回滚
+		}
+	}]
+}); 
+
+function updateLeaguerPhoto(){
+	$.ajaxFileUpload({
+		url:'updateUPhoto',
+		secureuri:false,
+		fileElementId:"wcxuphotos",
+		dataType:"text",
+		success:function(data,status){
+			data=$.trim(data);
+			if(data!=null && data!=""){
+				$("#showLeaguerPhoto>img").attr("src",data);
+				$("#showPhotoDiv").css("display","none");
+			}else{
+				alert("图片修改失败...");
+			}
+		},
+		error:function(data,status,e){
+			alert("修改图片失败...");
+		}
+	});
+}
+</script>
