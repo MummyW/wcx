@@ -9,20 +9,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.wcx.bean.Manager;
-import com.wcx.biz.WcxmanagerBiz;
+import com.wcx.biz.IWcxmanagerBiz;
 
 @Controller
 public class ManagerController {
 	@Autowired
-	private WcxmanagerBiz wcxmanagerBiz;
+	private IWcxmanagerBiz wcxmanagerBiz;
 	
 	@RequestMapping("/back/managerLogin")
 	@ResponseBody
 	public String managerLogin(HttpSession session,String wcxmname,String wcxmpwd){
-		System.out.println(wcxmname);
-		System.out.println(wcxmpwd);
 		Manager manager=this.wcxmanagerBiz.managerLogin(wcxmname, wcxmpwd);
-		System.out.println(manager);
 		Gson gson=new Gson();
 		if(manager==null){
 			return gson.toJson(null);

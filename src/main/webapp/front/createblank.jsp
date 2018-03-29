@@ -3,6 +3,12 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+pageContext.setAttribute("APP_PATH",request.getContextPath());
+
+if(session.getAttribute("currentLoginUser") == null || session.getAttribute("currentLoginUser")=="" ){
+	
+}
 %>
 <!doctype html>
 <html>
@@ -10,13 +16,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta charset="utf-8">
 <title>创建调查问卷_问查星</title>
 <link type="text/css" rel="stylesheet" href="css/login.css"/>
-<link rel="shortcut icon" href="../img/wlogo.png" type="image/x-icon">
+<link rel="shortcut icon" href="${APP_PATH}/img/wlogo.png" type="image/x-icon">
 
 </head>
 
 <body>
 	<div id="BS">
-    	
     	<%@include file="jsp/head.jsp" %>
     	
         <div class="BS-box" style="text-align:left;">
@@ -53,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             &nbsp;   &nbsp;   &nbsp;
                                         </td>
                                         <td valign="middle" style="padding-bottom: 30px;">
-                                        	<input type="submit" name="ctl01$ContentPlaceHolder1$lbtnNextStep" value="立即创建" onclick="return checkLogin();" id="ctl01_ContentPlaceHolder1_lbtnNextStep" class="btn btn-default create__btn-new" style="width:200px;" />
+                                        	<input  name="ctl01$ContentPlaceHolder1$lbtnNextStep" value="立即创建"  id="ctl01_ContentPlaceHolder1_lbtnNextStep" class="btn btn-default create__btn-new" style="width:200px;" />
                                             <div style="float: right; display: inline; margin-top: 58px; margin-left: 30px;">
                                             	<span id="ctl01_ContentPlaceHolder1_lblMsg" style="color:Red;"></span>
                                             </div>
@@ -93,30 +98,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                 </div>
-                <script type="text/javascript"></script>
             </form>
         </div>
     </div>
     <div style="display:none;">
     
     </div>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
     
-    <script type="text/javascript" src="../js/jQuery-3.3.0-min.js"></script>
-    <script>
     var createQuestion = $("#ctl01_ContentPlaceHolder1_lbtnNextStep");
-    var questionName = $.trim( $("#ctl01_ContentPlaceHolder1_txtQName").val() );
-    createQuestion.click(function(){
-    	if(questionName == ""){
-    		alert("请输入问卷名称");
-    		
-    		return;
-    	}else{
-    		location.href="addSurvey.jsp?questionName="+questionName;
-    		$.post("addSurvey",{wcxsname:questionName},function(data){
-    			
-    		},"text")
-    	}
-    })
+    
+     $(createQuestion).click(function(){
+    	 if($.trim( $("#ctl01_ContentPlaceHolder1_txtQName").val() )  == ""){
+     		alert("请输入问卷名称");
+     		return;
+     	}else if($("#ctl01_lblUserName").text()==''  ){
+     		alert('请先登录');
+     		location.href="login.html";
+     	}else{
+		    var questionName = $.trim( $("#ctl01_ContentPlaceHolder1_txtQName").val() );
+     		
+     		$.post("addSurvey",{wcxsname:questionName},function(data){
+ 	    		if(data == 1 || data=="1"){
+ 		    		location.href="addSurvey.jsp";
+ 	    		}	
+     		},"text");
+     	}
+    }) 
     
     </script>
 </body>

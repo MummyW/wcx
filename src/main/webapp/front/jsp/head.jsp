@@ -232,25 +232,11 @@ dt.user-icon {
                         <dd class="spinner-list">
                         	
 	                        <c:if test="${not empty currentLoginUser }">
-								<%-- <li id="loginInfo">
-									<a href="javascript:void(0)">&nbsp;${currentLoginUser.wcxuname }</a>
-								</li> --%>
 								<a href="javascript:void(0)" class="user-name">
 	                        		<span id="ctl01_lblUserName" style="text-align:center">${currentLoginUser.wcxuname }</span>
 	                        		<span class="caret"></span>
 	                        	</a>
 							</c:if>
-	                        
-                        	<%-- <c:if test="${not empty currentLoginLeaguer }">
-								<li id="loginInfo">
-									<a href="javascript:void(0)">&nbsp;${currentLoginLeaguer.lname }</a>
-								</li>
-							</c:if>
-							<c:if test="${empty currentLoginLeaguer }">
-								<li id="loginInfo">
-									<a href="javascript:showLoginDiv()" id="currentloginUser">登录</a>
-								</li>
-							</c:if> --%>
                             
                             <ul style="width:100px">
                             	<span class="caret-inverted"></span>
@@ -272,7 +258,7 @@ dt.user-icon {
                         <a class="user-name" href="/loginout.aspx">
                         <dt class="icon out-icon"></dt>
                         <dd class="spinner-list">
-                            <span>退出</span>
+                            <span id="loginout">退出</span>
                         </dd>
                         </a>
                     </dl>
@@ -281,5 +267,17 @@ dt.user-icon {
         </div>
         
     </div>
+    
 </body>
+<script type="text/javascript" src="${APP_PATH }/js/jQuery-3.3.0-min.js"></script>
+<script type="text/javascript">
+	console.log($)
+	$("#loginout").click(function(){
+		$.post("invaild",{},function(data){
+			if(data ==1){
+				location.href="../front/login.html";
+			}
+		})
+	})
+</script>
 </html>

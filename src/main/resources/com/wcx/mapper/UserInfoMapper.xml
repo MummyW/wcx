@@ -13,6 +13,6 @@
 	
 	<!-- 登录用户 -->
 	<select id="userLogin" parameterType="Map" resultType="UserInfo">
-		select * from wenchaxinguserInfo where wcxuname=#{uname} and wcxupwd=#{pwd}
+		select wcxuid,wcxuname,wcxupwd,wcxuemail,wcxuphoto from wenchaxinguserInfo where wcxupwd=#{wcxupwd} and wcxuname=#{wcxuname}
 	</select>
 </mapper>

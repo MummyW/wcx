@@ -5,6 +5,12 @@
     width: 600px;
 	background:#fff;
 }
+
+#voteManage:hover{
+	box-shadow:-20px 0 10px 0 #ff6700; 
+}
+
+
 #voteManage dl {
     line-height: 40px;
 }
@@ -27,6 +33,10 @@
 }
 #voteManage dl dd.button a {
     margin: 0 10px;
+}
+
+.w600{
+	width:600px;
 }
 .box {
     border: 2px solid #79a4cf;

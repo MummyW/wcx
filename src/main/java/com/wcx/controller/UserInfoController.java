@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.wcx.bean.UserInfo;
 import com.wcx.biz.IUserInfoBiz;
+import com.wcx.helper.DataHelper;
+import com.wcx.util.MD5Encryption;
 
 @Controller
 public class UserInfoController {
@@ -19,14 +21,18 @@ public class UserInfoController {
 	
 	@RequestMapping("/front/userLogin")
 	@ResponseBody
-	public String userLogin(HttpSession session,String uname,String pwd){
-		UserInfo userInfo = this.userInfoBiz.userInfoLogin(uname, pwd);
+	public String userLogin(HttpSession session,UserInfo userInfo){
+		userInfo.setWcxupwd(MD5Encryption.createPassword(userInfo.getWcxupwd()));
+		UserInfo user = this.userInfoBiz.userInfoLogin(userInfo.getWcxuname(), userInfo.getWcxupwd());;
 		Gson gson = new Gson();
-		if(userInfo == null){
+		if(user == null){
 			return gson.toJson(null);
 		}else{
-			session.setAttribute("currentLoginUser", userInfo);
-			return gson.toJson(userInfo);
+			session.setAttribute("currentLoginUser", user);
+			//存储到后端的缓存中
+			DataHelper.setLoginUserInfo(user);
+			
+			return gson.toJson(user);
 		}
 	}
 	
@@ -35,6 +41,13 @@ public class UserInfoController {
 	public Integer userReg(UserInfo userInfo){
 		int result = this.userInfoBiz.userReg(userInfo);
 		return result;
-		
 	}
+	
+	@RequestMapping("/front/invaild")
+	@ResponseBody
+	public Integer userReg(HttpSession session){
+		session.invalidate();
+		return 1;
+	}
+	
 }
