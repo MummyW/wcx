@@ -24,15 +24,15 @@
     
     <div class="wu-sidebar" data-options="region:'west',split:true,border:true,title:'导航菜单'"> 
     	<div class="easyui-accordion" data-options="border:false,fit:true"> 
-        	<div title="用户信息管理" data-options="iconCls:'icon-users'" style="padding:5px;">  	
+        	<div title="用户信息管理" data-options="iconCls:'icon-users',selected:true" style="padding:5px;">  	
     			<ul class="easyui-tree wu-side-tree">    
     			<!-- 通过这个class属性来点击下面a标签生成相应的网页 -->
-                    <li iconCls="icon-user-gray-cool"><a href="javascript:void(0)" data-icon="icon-user-gray-cool" data-link="#" iframe="0">管理员管理</a></li>
-                    <li iconCls="icon-user-green"><a href="javascript:void(0)" data-icon="icon-user-green" data-link="#" iframe="0">用户管理</a></li>                    
+                    <li iconCls="icon-user-gray-cool"><a href="javascript:void(0)" data-icon="icon-user-gray-cool" data-link="interface/Manager.html" iframe="0">管理员管理</a></li>
+                    <li iconCls="icon-user-green"><a href="javascript:void(0)" data-icon="icon-user-green" data-link="interface/UserInfo.html" iframe="0">用户管理</a></li>                    
                 </ul>
             </div>
             
-            <div title="问卷管理" data-options="iconCls:'icon-advancedsettings2',selected:true" style="padding:10px;">  
+            <div title="问卷管理" data-options="iconCls:'icon-advancedsettings2'" style="padding:10px;">  
         		<ul class="easyui-tree wu-side-tree">
                     <li iconCls="icon-ipod-nano"><a href="javascript:void(0)" data-icon="icon-ipod-nano" data-link="#" iframe="0">问卷类型管理</a></li>
                     <li iconCls="icon-house-key"><a href="javascript:void(0)" data-icon="icon-house-key" data-link="#" iframe="0">问卷管理</a></li>

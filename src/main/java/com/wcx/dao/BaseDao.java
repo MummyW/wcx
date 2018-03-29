@@ -39,4 +39,5 @@ public interface BaseDao<T> {
 	public Double findFunc(Class<?> c,Map<String, Object> map,String sqlId);
 	
 	public Double findFunc(Class<?> c,Object object,String sqlId);
+	
 }

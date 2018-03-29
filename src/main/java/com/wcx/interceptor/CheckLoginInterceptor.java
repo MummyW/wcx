@@ -35,7 +35,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor{
 			String path=arg0.getScheme()+"://"+arg0.getServerName()+":"+arg0.getServerPort()+arg0.getContextPath()+"/";
 			arg1.setContentType("text/html;charset=utf-8");
 			PrintWriter out=arg1.getWriter();
-			out.println("<script>alert('请先登录...');location.href='"+path+"backlogin.html'</script>");
+			out.println("<script>alert('请先登录...');location.href='"+path+"back/backlogin.html'</script>");
 			out.flush();
 			out.close();
 			return false;

@@ -7,4 +7,29 @@
 	<select id="managerLogin" parameterType="Map" resultType="Manager">
 		select wcxmid,wcxmname,wcxmpwd,wcxmemail,wcxmalipay,wcxmpic,wcxqq,wcxwechat from wenchaxingmanager where wcxmname=#{wcxmname} and wcxmpwd=#{wcxmpwd}
 	</select>
+	
+	<!-- 分页查询 -->
+	<select id="manfindByPage" parameterType="Map" resultType="Manager">
+		select * from(select a.*,rownum rn from(
+			select wcxmid,wcxmname,wcxmpwd,wcxmemail,wcxmalipay,wcxmpic,wcxqq,wcxwechat from wenchaxingmanager order by wcxmid) a
+			where rownum&lt;=#{pageNo}*#{pageSize}) where rn&gt;(#{pageNo}-1)*#{pageSize}
+	</select>
+	
+	<!-- 查询总记录条数 -->
+	<select id="getCount" resultType="double">
+        select count(wcxmid) total from wenchaxingmanager
+    </select>
+    
+    <!-- 添加 -->
+	<insert id="addManager" parameterType="Manager">
+		<selectKey keyProperty="wcxmid" keyColumn="wcxmid" resultType="Integer" order="BEFORE">
+			select seq_wenchaxingmanager_wcxmid.nextval from dual
+		</selectKey>
+			insert into wenchaxingmanager(wcxmid,wcxmname,wcxmpwd,wcxmemail,wcxmalipay,wcxmpic,wcxqq,wcxwechat) values(#{wcxmid},#{wcxmname},#{wcxmpwd},#{wcxmemail},#{wcxmalipay},#{wcxmpic},#{wcxqq},#{wcxwechat})
+	</insert>
+	
+	<!-- 修改密码 -->
+	<update id="updateMPwd" parameterType="Map">
+		update wenchaxingmanager set wcxmpwd=#{newpwd} where wcxmid=#{wcxmid} and wcxmpwd=#{oldpwd}
+	</update>
 </mapper>
