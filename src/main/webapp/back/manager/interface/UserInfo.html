@@ -27,12 +27,6 @@ adminObj = $('#userinfo_data').datagrid({
         {field:'wcxuemail',title:'用户邮箱',width:100,align:'center',editor:{type:"text",options:{required:true}}},
         {field:'wcxualipay',title:'管理员支付宝',width:100,align:'center',editor:{type:"text",options:{required:true}}},
         {field:'wcxuphoto',title:'用户头像',width:100,align:'center',editor:{type:"text",options:{required:true}}},
-        
-        /* {field:'wcxuphoto',title:'用户头像',width:100,align:'center',editor:{type:"text",options:{required:true}},formatter:function(val,row,index){
-        	wcxuphoto = "<img src='../../"+val+"' width='80px' height='80px' onclick='updateLeaguerPhoto()'>";
-     	   return wcxuphoto;
-        }}, */
-        
         {field:'wcxupwd',title:'用户密码',width:100,align:'center',editor:{type:"text",options:{required:true}}},
         {field:'wcxuqq',title:'用户QQ',width:100,align:'center',editor:{type:"text",options:{required:true}}},
         {field:'wcxuwechat',title:'用户微信',width:100,align:'center',editor:{type:"text",options:{required:true}}},
@@ -83,24 +77,26 @@ adminObj = $('#userinfo_data').datagrid({
 			var rows = adminObj.datagrid("getChecked");    //返回所有行的复选框已被选中。
 			console.info(rows);
 			if(rows.length <=0 ){
-				$.messager.show({title:'温馨提示' , msg:'请选择您要删除的管理员信息 . . . ' , timeout:2000 , showType:'slide'});
+				$.messager.show({title:'温馨提示' , msg:'请选择您要删除的用户信息 . . . ' , timeout:2000 , showType:'slide'});
 			}else{
 				$.messager.confirm('删除确认' , '数据一旦删除将不能恢复，您确定要删除吗 . . .' , function(r){
 					if(r){
-						var i;
+						//var i;
 						var ids = "";
-						for(i=0,len=rows.length;i<len-1;i++){
+						
+						for(var i=0,len=rows.length;i<len-1;i++){
 							ids += rows[i].wcxuid+",";    //每个数据之间插入"," 后台通过这个逗号来判断有多少数据要删除
 						}
 						ids +=rows[i].wcxuid;    //最后一个数据的后面不要加上  ","
-						
+						//alert(ids);
+						//return;
 						$.post("../../deleteUser",{op:"deleteUser",ids:ids},function(data){
 							if(data>0){
-								$.messager.show({title:'成功提示' , msg:'管理员信息删除成功 . . . ' , timeout:2000 , showType:'slide'});
+								$.messager.show({title:'成功提示' , msg:'用户信息删除成功 . . . ' , timeout:2000 , showType:'slide'});
 								adminObj.datagrid("reload");      //重载记录，跟'load'方法一样但是重载的是当前页的记录而非第一页。
 							}else{
 								adminObj.datagrid("rejectChanges");    //说明删除失败，数据回滚
-								$.messager.alert('失败提示' , '管理员信息删除失败 . . . ' , 'error');
+								$.messager.alert('失败提示' , '用户信息删除失败 . . . ' , 'error');
 							}
 						},'text');
 					}
@@ -115,7 +111,7 @@ adminObj = $('#userinfo_data').datagrid({
 				adminObj.datagrid("endEdit",adminEditRow);   //结束编辑
 				//获取用户编辑的第一行
 				var rows = adminObj.datagrid("getChanges")[0];
-					alert(rows);
+				
 					console.info(rows);
 				if(rows!=undefined){
 					rows.op = adminOp;

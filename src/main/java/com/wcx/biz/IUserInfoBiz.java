@@ -30,10 +30,10 @@ public interface IUserInfoBiz {
 	
 	/**
 	 * 删除用户
-	 * @param wcxuids
+	 * @param wcxuid
 	 * @return
 	 */
-	public Integer deleteUser(Integer ids);
+	public Integer deleteUser(Integer wcxuid);
 	
 	
 	/**

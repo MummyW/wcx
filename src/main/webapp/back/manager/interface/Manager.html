@@ -49,7 +49,7 @@ adminObj = $('#Manager_data').datagrid({
 		text:"修改",
 		iconCls: 'icon-user-edit',
 		handler: function(){
-			adminOp = "updateMPwd";
+			adminOp = "updateAdmin";
 			adminFlag = "修改";
 			
 			if(adminEditRow != undefined){    //有正在被编辑的行
@@ -59,7 +59,7 @@ adminObj = $('#Manager_data').datagrid({
 			}
 			
 			var row = adminObj.datagrid("getChecked")[0];
-			oldPwd = row.wcxmpwd;
+			oldPwd = row.pwd;
 
 			if(row == undefined){
 				$.messager.show({title:'温馨提示' , msg:'请选择您要修改的管理员信息 . . . ',timeout:2000,showType:'slide'});
@@ -67,6 +67,39 @@ adminObj = $('#Manager_data').datagrid({
 				var index = adminObj.datagrid("getRowIndex",row);
 				adminObj.datagrid("beginEdit",index);
 				adminEditRow = index;
+			}
+		}
+	},'-',{
+		text:"删除",
+		iconCls: 'icon-user-delete',
+		handler: function(){
+			var rows = adminObj.datagrid("getChecked");    //返回所有行的复选框已被选中。
+			console.info(rows);
+			if(rows.length <=0 ){
+				$.messager.show({title:'温馨提示' , msg:'请选择您要删除的管理员信息 . . . ' , timeout:2000 , showType:'slide'});
+			}else{
+				$.messager.confirm('删除确认' , '数据一旦删除将不能恢复，您确定要删除吗 . . .' , function(r){
+					if(r){
+						var i;
+						var ids = "";
+						
+						for(i=0,len=rows.length;i<len-1;i++){
+							ids += rows[i].wcxmid+",";    //每个数据之间插入"," 后台通过这个逗号来判断有多少数据要删除
+						}
+						ids +=rows[i].wcxmid;    //最后一个数据的后面不要加上  ","
+						//alert(ids);
+						//return;
+						$.post("../../deleteManager",{op:"deleteManager",ids:ids},function(data){
+							if(data>0){
+								$.messager.show({title:'成功提示' , msg:'管理员信息删除成功 . . . ' , timeout:2000 , showType:'slide'});
+								adminObj.datagrid("reload");      //重载记录，跟'load'方法一样但是重载的是当前页的记录而非第一页。
+							}else{
+								adminObj.datagrid("rejectChanges");    //说明删除失败，数据回滚
+								$.messager.alert('失败提示' , '管理员信息删除失败 . . . ' , 'error');
+							}
+						},'text');
+					}
+				});
 			}
 		}
 	},'-',{
@@ -86,10 +119,10 @@ adminObj = $('#Manager_data').datagrid({
 					$.post("../../addManager",rows,function(data){
 						data = parseInt( $.trim(data) );
 						if(data>0){
-							$.messager.show( {title:"成功提示",msg:adminFlag+"管理员信保存成功",timeout:2000,showType:'slide'} );
+							$.messager.show( {title:"成功提示",msg:adminFlag+"管理员信息添加成功",timeout:2000,showType:'slide'} );
 							adminObj.datagrid("reload");
 						}else{
-							$.messager.alert("失败提示",adminFlag+"管理员信息保存失败 . . .","error");
+							$.messager.alert("失败提示",adminFlag+"管理员信息添加失败 . . .","error");
 						}
 					},"text");
 				}

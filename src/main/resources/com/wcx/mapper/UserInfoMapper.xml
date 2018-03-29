@@ -13,6 +13,36 @@
 	
 	<!-- 登录用户 -->
 	<select id="userLogin" parameterType="Map" resultType="UserInfo">
-		select wcxuid,wcxuname,wcxupwd,wcxuemail,wcxuphoto from wenchaxinguserInfo where wcxupwd=#{wcxupwd} and wcxuname=#{wcxuname}
+		select * from wenchaxinguserInfo where wcxuname=#{uname} and wcxupwd=#{pwd}
 	</select>
+	
+	<!-- 分页查询 -->
+	<select id="userfindByPage" parameterType="Map" resultType="UserInfo">
+		select * from(select a.*,rownum rn from(
+			select wcxuid,wcxuname,wcxuemail,wcxualipay,wcxuphoto,wcxupwd,wcxuqq,wcxuwechat from wenchaxinguserInfo order by wcxuid) a
+			where rownum&lt;=#{pageNo}*#{pageSize}) where rn&gt;(#{pageNo}-1)*#{pageSize}
+	</select>
+	
+	<!-- 查询总记录条数 -->
+	<select id="getCount" resultType="double">
+        select count(wcxuid) total from wenchaxinguserInfo
+    </select>
+	
+	<!-- 添加 -->
+	<insert id="addUser" parameterType="UserInfo">
+		<selectKey keyProperty="wcxuid" keyColumn="wcxuid" resultType="Integer" order="BEFORE">
+			select seq_wenchaxinguserInfo_wcxuid.nextval from dual
+		</selectKey>
+			insert into wenchaxinguserInfo(wcxuid,wcxuname,wcxuemail,wcxualipay,wcxuphoto,wcxupwd,wcxuqq,wcxuwechat) values(#{wcxuid},#{wcxuname},#{wcxuemail},#{wcxualipay},#{wcxuphoto},#{wcxupwd},#{wcxuqq},#{wcxuwechat})
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteUser" parameterType="Integer">
+        delete from wenchaxinguserInfo where wcxuid=#{wcxuid}
+    </delete>
+    
+    <!-- 修改图片 -->
+    <update id="updateUPhoto" parameterType="Map">
+		update wenchaxinguserInfo set wcxuphoto=#{wcxuphoto} where wcxuid=#{wcxuid}
+	</update>
 </mapper>

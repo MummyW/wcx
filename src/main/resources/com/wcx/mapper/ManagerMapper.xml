@@ -28,8 +28,8 @@
 			insert into wenchaxingmanager(wcxmid,wcxmname,wcxmpwd,wcxmemail,wcxmalipay,wcxmpic,wcxqq,wcxwechat) values(#{wcxmid},#{wcxmname},#{wcxmpwd},#{wcxmemail},#{wcxmalipay},#{wcxmpic},#{wcxqq},#{wcxwechat})
 	</insert>
 	
-	<!-- 修改密码 -->
-	<update id="updateMPwd" parameterType="Map">
-		update wenchaxingmanager set wcxmpwd=#{newpwd} where wcxmid=#{wcxmid} and wcxmpwd=#{oldpwd}
-	</update>
+	<!-- 删除 -->
+	<delete id="deleteManager" parameterType="Integer">
+        delete from wenchaxingmanager where wcxmid=#{wcxmid}
+    </delete>
 </mapper>
