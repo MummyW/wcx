@@ -228,7 +228,9 @@ dt.user-icon {
                         <dd class="line"></dd>
                     </dl>
                     <dl class="user-info pull-left">
+                    	
                     	<dt class="icon user-icon"><em></em></dt>
+                    	
                         <dd class="spinner-list">
                         	
 	                        <c:if test="${not empty currentLoginUser }">
@@ -240,7 +242,8 @@ dt.user-icon {
                             
                             <ul style="width:100px">
                             	<span class="caret-inverted"></span>
-                                <li><a href="/newwjx/manage/userinfo.aspx">用户信息</a></li>
+                                <!-- <li><a href="/newwjx/manage/userinfo.aspx">用户信息</a></li> -->
+                                <li><a href="user.html">用户信息</a></li>
                                 <li id="ctl01_hrefUpgrade"><a href="/register/upgradevip.aspx?upgradeReason=1">升级</a></li>
                                 <li id="ctl01_liClient"><a href="/html/contactus.aspx">客服中心</a></li>
                             </ul>

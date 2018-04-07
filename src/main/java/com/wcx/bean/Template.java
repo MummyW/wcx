@@ -13,20 +13,22 @@ public class Template implements Serializable{
 	
 	private int wcxtid;            //模板分类id
     private String wcxtname;			//模板分类名
+    private int status;		//模板分类的状态
     
 	@Override
 	public String toString() {
-		return "template [wcxtid=" + wcxtid + ", wcxtname=" + wcxtname + "]";
+		return "Template [wcxtid=" + wcxtid + ", wcxtname=" + wcxtname + ", status=" + status + "]";
 	}
 
 	public Template() {
 		super();
 	}
 
-	public Template(int wcxtid, String wcxtname) {
+	public Template(int wcxtid, String wcxtname, int status) {
 		super();
 		this.wcxtid = wcxtid;
 		this.wcxtname = wcxtname;
+		this.status = status;
 	}
 
 	public int getWcxtid() {
@@ -45,10 +47,19 @@ public class Template implements Serializable{
 		this.wcxtname = wcxtname;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + status;
 		result = prime * result + wcxtid;
 		result = prime * result + ((wcxtname == null) ? 0 : wcxtname.hashCode());
 		return result;
@@ -63,6 +74,8 @@ public class Template implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Template other = (Template) obj;
+		if (status != other.status)
+			return false;
 		if (wcxtid != other.wcxtid)
 			return false;
 		if (wcxtname == null) {

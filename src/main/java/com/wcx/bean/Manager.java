@@ -17,99 +17,67 @@ public class Manager  implements Serializable{
 	private String wcxmpic;                //管理员头像
 	private String wcxqq;                //管理员QQ
 	private String wcxwechat;             //管理员微信
+	private int status;            //状态 
 	
-	@Override
-	public String toString() {
-		return "Manager [wcxmid=" + wcxmid + ", wcxmname=" + wcxmname + ", wcxmpwd=" + wcxmpwd + ", wcxmemail="
-				+ wcxmemail + ", wcxmalipay=" + wcxmalipay + ", wcxmpic=" + wcxmpic + ", wcxqq=" + wcxqq
-				+ ", wcxwechat=" + wcxwechat + "]";
-	}
-
-	public Manager() {
-		super();
-	}
-
-	public Manager(int wcxmid, String wcxmname, String wcxmpwd, String wcxmemail, String wcxmalipay, String wcxmpic,
-			String wcxqq, String wcxwechat) {
-		super();
-		this.wcxmid = wcxmid;
-		this.wcxmname = wcxmname;
-		this.wcxmpwd = wcxmpwd;
-		this.wcxmemail = wcxmemail;
-		this.wcxmalipay = wcxmalipay;
-		this.wcxmpic = wcxmpic;
-		this.wcxqq = wcxqq;
-		this.wcxwechat = wcxwechat;
-	}
-
 	public int getWcxmid() {
 		return wcxmid;
 	}
-
 	public void setWcxmid(int wcxmid) {
 		this.wcxmid = wcxmid;
 	}
-
 	public String getWcxmname() {
 		return wcxmname;
 	}
-
 	public void setWcxmname(String wcxmname) {
 		this.wcxmname = wcxmname;
 	}
-
 	public String getWcxmpwd() {
 		return wcxmpwd;
 	}
-
 	public void setWcxmpwd(String wcxmpwd) {
 		this.wcxmpwd = wcxmpwd;
 	}
-
 	public String getWcxmemail() {
 		return wcxmemail;
 	}
-
 	public void setWcxmemail(String wcxmemail) {
 		this.wcxmemail = wcxmemail;
 	}
-
 	public String getWcxmalipay() {
 		return wcxmalipay;
 	}
-
 	public void setWcxmalipay(String wcxmalipay) {
 		this.wcxmalipay = wcxmalipay;
 	}
-
 	public String getWcxmpic() {
 		return wcxmpic;
 	}
-
 	public void setWcxmpic(String wcxmpic) {
 		this.wcxmpic = wcxmpic;
 	}
-
 	public String getWcxqq() {
 		return wcxqq;
 	}
-
 	public void setWcxqq(String wcxqq) {
 		this.wcxqq = wcxqq;
 	}
-
 	public String getWcxwechat() {
 		return wcxwechat;
 	}
-
 	public void setWcxwechat(String wcxwechat) {
 		this.wcxwechat = wcxwechat;
 	}
-
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + status;
 		result = prime * result + ((wcxmalipay == null) ? 0 : wcxmalipay.hashCode());
 		result = prime * result + ((wcxmemail == null) ? 0 : wcxmemail.hashCode());
 		result = prime * result + wcxmid;
@@ -120,7 +88,6 @@ public class Manager  implements Serializable{
 		result = prime * result + ((wcxwechat == null) ? 0 : wcxwechat.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -130,6 +97,8 @@ public class Manager  implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Manager other = (Manager) obj;
+		if (status != other.status)
+			return false;
 		if (wcxmalipay == null) {
 			if (other.wcxmalipay != null)
 				return false;
@@ -169,4 +138,28 @@ public class Manager  implements Serializable{
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Manager [wcxmid=" + wcxmid + ", wcxmname=" + wcxmname + ", wcxmpwd=" + wcxmpwd + ", wcxmemail="
+				+ wcxmemail + ", wcxmalipay=" + wcxmalipay + ", wcxmpic=" + wcxmpic + ", wcxqq=" + wcxqq
+				+ ", wcxwechat=" + wcxwechat + ", status=" + status + "]";
+	}
+	public Manager(int wcxmid, String wcxmname, String wcxmpwd, String wcxmemail, String wcxmalipay, String wcxmpic,
+			String wcxqq, String wcxwechat, int status) {
+		super();
+		this.wcxmid = wcxmid;
+		this.wcxmname = wcxmname;
+		this.wcxmpwd = wcxmpwd;
+		this.wcxmemail = wcxmemail;
+		this.wcxmalipay = wcxmalipay;
+		this.wcxmpic = wcxmpic;
+		this.wcxqq = wcxqq;
+		this.wcxwechat = wcxwechat;
+		this.status = status;
+	}
+	public Manager() {
+		super();
+	}
+	
+	
 }

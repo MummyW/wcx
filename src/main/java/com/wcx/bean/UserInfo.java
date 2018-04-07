@@ -17,29 +17,13 @@ public class UserInfo implements Serializable{
      private String  wcxupwd;          //密码
      private String  wcxuqq;             //QQ
      private String wcxuwechat;         //微信
+     private int status;            //状态 
      
 	@Override
 	public String toString() {
 		return "UserInfo [wcxuid=" + wcxuid + ", wcxuname=" + wcxuname + ", wcxuemail=" + wcxuemail + ", wcxualipay="
 				+ wcxualipay + ", wcxuphoto=" + wcxuphoto + ", wcxupwd=" + wcxupwd + ", wcxuqq=" + wcxuqq
-				+ ", wcxuwechat=" + wcxuwechat + "]";
-	}
-
-	public UserInfo() {
-		super();
-	}
-
-	public UserInfo(int wcxuid, String wcxuname, String wcxuemail, String wcxualipay, String wcxuphoto, String wcxupwd,
-			String wcxuqq, String wcxuwechat) {
-		super();
-		this.wcxuid = wcxuid;
-		this.wcxuname = wcxuname;
-		this.wcxuemail = wcxuemail;
-		this.wcxualipay = wcxualipay;
-		this.wcxuphoto = wcxuphoto;
-		this.wcxupwd = wcxupwd;
-		this.wcxuqq = wcxuqq;
-		this.wcxuwechat = wcxuwechat;
+				+ ", wcxuwechat=" + wcxuwechat + ", status=" + status + "]";
 	}
 
 	public int getWcxuid() {
@@ -106,10 +90,19 @@ public class UserInfo implements Serializable{
 		this.wcxuwechat = wcxuwechat;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + status;
 		result = prime * result + ((wcxualipay == null) ? 0 : wcxualipay.hashCode());
 		result = prime * result + ((wcxuemail == null) ? 0 : wcxuemail.hashCode());
 		result = prime * result + wcxuid;
@@ -130,6 +123,8 @@ public class UserInfo implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		UserInfo other = (UserInfo) obj;
+		if (status != other.status)
+			return false;
 		if (wcxualipay == null) {
 			if (other.wcxualipay != null)
 				return false;
@@ -169,4 +164,24 @@ public class UserInfo implements Serializable{
 			return false;
 		return true;
 	}
+
+	public UserInfo(int wcxuid, String wcxuname, String wcxuemail, String wcxualipay, String wcxuphoto, String wcxupwd,
+			String wcxuqq, String wcxuwechat, int status) {
+		super();
+		this.wcxuid = wcxuid;
+		this.wcxuname = wcxuname;
+		this.wcxuemail = wcxuemail;
+		this.wcxualipay = wcxualipay;
+		this.wcxuphoto = wcxuphoto;
+		this.wcxupwd = wcxupwd;
+		this.wcxuqq = wcxuqq;
+		this.wcxuwechat = wcxuwechat;
+		this.status = status;
+	}
+
+	public UserInfo() {
+		super();
+	}
+     
+     
 }

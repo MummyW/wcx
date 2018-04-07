@@ -23,18 +23,20 @@
         }
     </style>
     <script type="text/javascript">
-    	function userLogin(){
-    		var uname = $.trim( $("#UserName").val() );
-    		var pwd = $.trim( $("#Password").val() );
+    	function userInfoLogin(){
+    		var wcxuname = $.trim( $("#UserName").val() );
+    		var wcxupwd = $.trim( $("#Password").val() );
     		
-    		if(uname == "" || pwd == ""){
+    		if(wcxuname == "" || wcxupwd == ""){
     			alert("登录失败，账号或密码不能为空 . . . ");
     			return;
     		}
-    		//alert(uname + pwd);
-    		$.post("userLogin",{wcxuname:uname,wcxupwd:pwd},function(data){
+    		//alert(wcxuname + wcxupwd);
+    		$.post("userInfoLogin",{wcxuname:wcxuname,wcxupwd:wcxupwd},function(data){
+    			//alert(data);
     			if(data!="" && data!=null){
-    				window.location.href="../index.jsp";
+    				location.href="../index.jsp";
+    				/* window.location.href="../index.jsp"; */
     			}else{
     				alert("账号或密码输入错误，请重新输入 . . .");
     			}
@@ -97,7 +99,7 @@
                     </div>
                 </fieldset>
                 <fieldset class="submit-wrapper" style="text-align: center; margin-top: 20px;">
-                    <input type="button" name="LoginButton" value="登 录" id="LoginButton" class="submitbutton" onmouseover="this.className=&#39;submitbutton submitbutton_hover&#39;;" onmouseout="this.className=&#39;submitbutton&#39;;" style="color:White;" onclick="userLogin()"/>
+                    <input type="button" name="LoginButton" value="登 录" id="LoginButton" class="submitbutton" onmouseover="this.className=&#39;submitbutton submitbutton_hover&#39;;" onmouseout="this.className=&#39;submitbutton&#39;;" style="color:White;" onclick="userInfoLogin()"/>
                     <span style="color: red; line-height: 28px;">
                         </span>
                     <a href="register.html" id="hrefRegister" title="只需２０秒，就可完成注册" class="register-now">立即注册</a>

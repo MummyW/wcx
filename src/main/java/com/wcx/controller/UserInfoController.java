@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.wcx.bean.Manager;
 import com.wcx.bean.UserInfo;
 import com.wcx.biz.IUserInfoBiz;
 
@@ -25,10 +26,18 @@ public class UserInfoController {
 	@Autowired
 	private IUserInfoBiz userInfoBiz;
 	
-	@RequestMapping("/front/userLogin")
+	//用这个构造函数来判断这个控制类是否创建成功
+	public UserInfoController(){
+		System.out.println("UserInfoController类创建成功");
+	}
+	
+	@RequestMapping("/front/userInfoLogin")
 	@ResponseBody
-	public String userLogin(HttpSession session,String uname,String pwd){
-		UserInfo userInfo = this.userInfoBiz.userInfoLogin(uname, pwd);
+	public String userInfoLogin(HttpSession session,String wcxuname,String wcxupwd){
+		System.out.println("控制层wcxuname= "+wcxuname);
+		System.out.println("控制层wcxupwd= "+wcxupwd);
+		UserInfo userInfo=this.userInfoBiz.userInfoLogin(wcxuname, wcxupwd);
+		System.out.println("控制层userInfo "+userInfo);
 		Gson gson = new Gson();
 		if(userInfo == null){
 			return gson.toJson(null);
@@ -37,6 +46,7 @@ public class UserInfoController {
 			return gson.toJson(userInfo);
 		}
 	}
+	
 	
 	@RequestMapping("/front/userRegister")
 	@ResponseBody
@@ -113,5 +123,53 @@ public class UserInfoController {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * 使得状态为0，删除单个多多个
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/delUserInfo")
+	@ResponseBody
+	public String delUserInfo(HttpServletRequest request){
+		String wcxuids = request.getParameter("wcxuids");
+		System.out.println(wcxuids);
+		Gson gson = new Gson();
+		return gson.toJson(this.userInfoBiz.delUserInfo(wcxuids));
+	}
+	
+	/**
+	 * 修改
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/updateUserInfo")
+	@ResponseBody
+	public String updateUserInfo(HttpServletRequest request){
+		String wcxuid = request.getParameter("wcxuid");
+		String wcxuname = request.getParameter("wcxuname");
+		String wcxuemail = request.getParameter("wcxuemail");
+		String wcxualipay = request.getParameter("wcxualipay");
+		String wcxupwd = request.getParameter("wcxupwd");
+		String wcxuqq = request.getParameter("wcxuqq");
+		String wcxuwechat = request.getParameter("wcxuwechat");
+		Gson gson = new Gson();
+		return gson.toJson(this.userInfoBiz.updateUserInfo(wcxuid, wcxuname, wcxuemail, wcxualipay, wcxupwd, wcxuqq, wcxuwechat));
+	}
+	
+	/**
+	 * 修改状态
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/updateUserStatus")
+	@ResponseBody
+	public String updateUserStatus(HttpServletRequest request){
+		Integer wcxuid = Integer.parseInt(request.getParameter("wcxuid"));
+		Integer status = Integer.parseInt(request.getParameter("status"));
+		Gson gson = new Gson();
+		return gson.toJson( this.userInfoBiz.updateUserStatus(wcxuid, status) );
 	}
 }

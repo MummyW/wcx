@@ -12,7 +12,7 @@ public interface IUserInfoBiz {
 	 * @param pwd
 	 * @return
 	 */
-	public UserInfo userInfoLogin(String uname,String pwd);
+	public UserInfo userInfoLogin(String wcxuname,String wcxupwd);
 	
 	/**
 	 * 注册
@@ -43,10 +43,23 @@ public interface IUserInfoBiz {
 	public  Map<String, Object> userfindByPage(int pageNo,int pageSize);
 	
 	/**
+	 * 修改状态
+	 * @param wcxuid
+	 * @param status
+	 * @return
+	 */
+	public int updateUserStatus(int wcxuid, int status);
+	
+	
+	/**
 	 * 修改图片
 	 * @param lid
 	 * @param photo
 	 * @return
 	 */
 	public int updateUPhoto(Integer wcxuid,String wcxuphoto);
+	
+	public int delUserInfo(String wcxuids);
+	
+	public int updateUserInfo(String wcxuid,String wcxuname,String wcxuemail,String wcxualipay,String wcxupwd,String wcxuqq,String wcxuwechat);
 }

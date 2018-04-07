@@ -2,10 +2,13 @@ package com.wcx.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -28,5 +31,5 @@ public class FileUpload {
 			e.printStackTrace();
 		}
 		return map;
-	}
+	}	
 }

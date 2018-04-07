@@ -110,7 +110,11 @@ function managerLogin(){
 	}
 	$.post("managerLogin",{wcxmname:wcxmname,wcxmpwd:wcxmpwd},function(data){
 		if(data!=null && data!=""){
-			location.href="manager/index.html";
+			location.href="manager/index.jsp";
+			if(data.wcxmpic!="" && data.wcxmpic!=null){
+				$("#userManagerPhoto").attr("src",data.wcxmpic);
+			}
+			$("#showManagerPhoto").attr("href","javascript:showPhotoDiv()");
 		}else{
 			alert("账号或密码错误...")
 		}

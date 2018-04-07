@@ -1,16 +1,15 @@
 package com.wcx.biz.impl;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wcx.bean.Manager;
 import com.wcx.bean.UserInfo;
 import com.wcx.biz.IUserInfoBiz;
 import com.wcx.dao.BaseDao;
-import com.wcx.util.MD5Encryption;
 import com.wcx.util.StringUtil;
 
 @Service
@@ -23,18 +22,20 @@ public class UserInfoBizImpl implements IUserInfoBiz{
 	 * 登录
 	 */
 	@Override
-	public UserInfo userInfoLogin(String uname, String pwd) {
-		if(StringUtil.isNull(uname,pwd)){
+	public UserInfo userInfoLogin(String wcxuname, String wcxupwd) {
+		System.out.println("业务层实现wcxuname= "+wcxuname);
+		if(StringUtil.isNull(wcxuname,wcxupwd)){
 			return null;
 		}else{
 			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("uname", uname);
-			map.put("pwd", pwd);
-			System.out.println(map);
-			return (UserInfo)this.baseDao.find(UserInfo.class, map, "userLogin");
+			map.put("wcxuname", wcxuname);
+			map.put("wcxupwd", wcxupwd);
+			System.out.println("业务层实现map= "+map);
+			
+			return (UserInfo)this.baseDao.find(UserInfo.class, map, "userInfoLogin");
 		}
 	}
-
+	
 	/**
 	 * 注册
 	 */
@@ -45,7 +46,7 @@ public class UserInfoBizImpl implements IUserInfoBiz{
 			return 0;
 		}else{
 			//密码加密
-			userInfo.setWcxupwd(MD5Encryption.createPassword(userInfo.getWcxupwd()));
+			//userInfo.setWcxupwd(MD5Encryption.createPassword(userInfo.getWcxupwd()));
 			return this.baseDao.add(UserInfo.class, userInfo, "userInfoReg");
 		}
 	}
@@ -75,7 +76,7 @@ public class UserInfoBizImpl implements IUserInfoBiz{
 	}
 	
 	/**
-	 * 删除用户
+	 * 彻底删除用户
 	 */
 	@Override
 	public Integer deleteUser(Integer wcxuid) {
@@ -96,6 +97,33 @@ public class UserInfoBizImpl implements IUserInfoBiz{
 			map.put("photo", wcxuphoto);
 			return this.baseDao.add(UserInfo.class, map, "updateUPhoto");
 		}
+	}
+
+	@Override
+	public int updateUserStatus(int wcxuid, int status) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("wcxuid", wcxuid);
+		map.put("status", status);		
+		return baseDao.update(UserInfo.class, map, "updateUserStatus");
+	}
+
+	@Override
+	public int delUserInfo(String wcxuids) {
+		return baseDao.delete(UserInfo.class, wcxuids, "delUserInfo");
+	}
+
+	@Override
+	public int updateUserInfo(String wcxuid, String wcxuname, String wcxuemail, String wcxualipay, String wcxupwd,
+			String wcxuqq, String wcxuwechat) {
+		Map<String, Object> map=new HashMap<String,Object>();
+		map.put("wcxuid", wcxuid);
+		map.put("wcxuname", wcxuname);
+		map.put("wcxuemail", wcxuemail);
+		map.put("wcxualipay", wcxualipay);
+		map.put("wcxupwd", wcxupwd);
+		map.put("wcxuqq", wcxuqq);
+		map.put("wcxuwechat", wcxuwechat);   //将这七个数据存入到Map中，在UserInfoMapper.xml中可以直接得到
+		return baseDao.update(UserInfo.class, map, "updateUserInfo");
 	}
 
 }

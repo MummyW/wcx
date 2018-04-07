@@ -22,7 +22,7 @@
             <div class="head">
                 <a href="javascript:void(0)" class="logo"><img src="../img/logo1.png" width="150" height="59" alt=""></a>
                 <div class="info fr">
-                    <a href="wenchaxinglogin.html" class="login btn">登录</a>
+                    <a href="login.html" class="login btn">登录</a>
                     <a href="${WEBAPP }/index.jsp" class="backwcx btn">返回首页</a>
                 </div>
             </div>
@@ -177,8 +177,8 @@
                 	alert("请输入验证码");
                 }else{
                 	$.post("userRegister",{wcxuname:$userName,wcxupwd:$pwd,wcxuemail:$email},function(data){
-                		
-                		location.href="wenchaxinglogin.html";
+                		alert("创建成功");
+                		location.href="login.html";
                 	},"text")
                 }
             }
